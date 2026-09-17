@@ -47,6 +47,15 @@ for item in BUILD.iterdir():
     if item.is_dir(): shutil.copytree(item,target,dirs_exist_ok=True)
     else: shutil.copy2(item,target)
 
+# Include live repository media uploaded by the admin uploader in the Pages artifact.
+# The ZIP intentionally excludes these directories, so without this step uploaded
+# chapter pages exist in data/manual-chapters.json but their images are missing from dist.
+for live_dir in ["chapter-images", "manga-covers"]:
+    source = ROOT / live_dir
+    target = DIST / live_dir
+    if source.exists():
+        shutil.copytree(source, target, dirs_exist_ok=True)
+
 for name in ["data/content.json","data/manual-chapters.json","data/extra-chapters.json","data/upcoming-chapters.json","data/ads-config.json"]:
     source=ROOT/name
     if source.exists():
