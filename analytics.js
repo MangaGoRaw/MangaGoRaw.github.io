@@ -1,0 +1,1 @@
+window.mangaGoRawAnalytics={pageView:function(){}};
