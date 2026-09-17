@@ -1,90 +1,10 @@
 {
-  "version": 1,
+  "version": 2,
   "chapters": [
-    {
-      "id": "manual-1789586567365",
-      "mangaId": "one-piece",
-      "number": 1194,
-      "title": "ワンピース raw ( One Piece raw ) 第1194話",
-      "slug": "one-piece-raw-1194",
-      "country": "JP",
-      "pages": [
-        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/one-piece/chapter-one-piece-raw-1194/.upload-1789666726301/0001-_877_2026_6_1_5_.jpg"
-      ],
-      "createdAt": "2026-09-16T19:22:46.422Z",
-      "updatedAt": "2026-09-17T17:38:49.554Z"
-    },
-    {
-      "id": "manual-1789586997631",
-      "mangaId": "days",
-      "number": 276,
-      "title": "SAKAMOTO DAYS – サカモトデイズ raw 第276話",
-      "slug": "sakamoto-raw-276",
-      "country": "JP",
-      "pages": [
-        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/days/chapter-sakamoto-raw-276/.upload-1789667293659/0001-_877_2026_6_1_6_.jpg"
-      ],
-      "createdAt": "2026-09-16T19:29:56.478Z",
-      "updatedAt": "2026-09-17T17:48:16.803Z"
-    },
-    {
-      "id": "manual-1789587026015",
-      "mangaId": "days",
-      "number": 275,
-      "title": "SAKAMOTO DAYS – サカモトデイズ raw 第275話",
-      "slug": "sakamoto-raw-275",
-      "country": "JP",
-      "pages": [
-        "/chapter-images/days/chapter-sakamoto-raw-275/0001-005_6aa6bb7392f36.jpg"
-      ],
-      "createdAt": "2026-09-16T19:30:25.373Z",
-      "updatedAt": "2026-09-17T19:34:30.860Z"
-    },
-    {
-      "id": "manual-1789655571692",
-      "mangaId": "the-fragrant-flowers-bloom-dignifiedly",
-      "number": 202,
-      "title": "薫る花は凛と咲くraw ( The fragrant flowers bloom dignifiedly raw ) 第202話",
-      "slug": "the-fragrant-raw-202",
-      "country": "JP",
-      "pages": [
-        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/the-fragrant-flowers-bloom-dignifiedly/chapter-the-fragrant-raw-202/.upload-1789666777728/0001-1.jpg",
-        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/the-fragrant-flowers-bloom-dignifiedly/chapter-the-fragrant-raw-202/.upload-1789666777728/0002-2.jpg",
-        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/the-fragrant-flowers-bloom-dignifiedly/chapter-the-fragrant-raw-202/.upload-1789666777728/0003-3.jpg",
-        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/the-fragrant-flowers-bloom-dignifiedly/chapter-the-fragrant-raw-202/.upload-1789666777728/0004-5.jpg",
-        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/the-fragrant-flowers-bloom-dignifiedly/chapter-the-fragrant-raw-202/.upload-1789666777728/0005-6.jpg",
-        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/the-fragrant-flowers-bloom-dignifiedly/chapter-the-fragrant-raw-202/.upload-1789666777728/0006-7.jpg",
-        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/the-fragrant-flowers-bloom-dignifiedly/chapter-the-fragrant-raw-202/.upload-1789666777728/0007-8.jpg",
-        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/the-fragrant-flowers-bloom-dignifiedly/chapter-the-fragrant-raw-202/.upload-1789666777728/0008-9.jpg",
-        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/the-fragrant-flowers-bloom-dignifiedly/chapter-the-fragrant-raw-202/.upload-1789666777728/0009-10.jpg",
-        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/the-fragrant-flowers-bloom-dignifiedly/chapter-the-fragrant-raw-202/.upload-1789666777728/0010-11.jpg",
-        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/the-fragrant-flowers-bloom-dignifiedly/chapter-the-fragrant-raw-202/.upload-1789666777728/0011-12.jpg",
-        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/the-fragrant-flowers-bloom-dignifiedly/chapter-the-fragrant-raw-202/.upload-1789666777728/0012-13.jpg",
-        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/the-fragrant-flowers-bloom-dignifiedly/chapter-the-fragrant-raw-202/.upload-1789666777728/0013-14.jpg",
-        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/the-fragrant-flowers-bloom-dignifiedly/chapter-the-fragrant-raw-202/.upload-1789666777728/0014-15.jpg",
-        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/the-fragrant-flowers-bloom-dignifiedly/chapter-the-fragrant-raw-202/.upload-1789666777728/0015-16.jpg",
-        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/the-fragrant-flowers-bloom-dignifiedly/chapter-the-fragrant-raw-202/.upload-1789666777728/0016-17.jpg",
-        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/the-fragrant-flowers-bloom-dignifiedly/chapter-the-fragrant-raw-202/.upload-1789666777728/0017-18.jpg",
-        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/the-fragrant-flowers-bloom-dignifiedly/chapter-the-fragrant-raw-202/.upload-1789666777728/0018-19.jpg",
-        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/the-fragrant-flowers-bloom-dignifiedly/chapter-the-fragrant-raw-202/.upload-1789666777728/0019-20.jpg",
-        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/the-fragrant-flowers-bloom-dignifiedly/chapter-the-fragrant-raw-202/.upload-1789666777728/0020-21.jpg",
-        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/the-fragrant-flowers-bloom-dignifiedly/chapter-the-fragrant-raw-202/.upload-1789666777728/0021-22.jpg"
-      ],
-      "createdAt": "2026-09-17T14:32:50.690Z",
-      "updatedAt": "2026-09-17T17:40:41.189Z"
-    },
-    {
-      "id": "manual-1789658144840",
-      "mangaId": "boku-to-roboko",
-      "number": 297,
-      "title": "僕とロボコ raw ( BOKU TO ROBOKO raw ) 第297話",
-      "slug": "boku-to-roboko-raw-297",
-      "country": "JP",
-      "pages": [
-        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/boku-to-roboko/chapter-boku-to-roboko-raw-297/.upload-1789666751407/0001-_877_2026_6_1_8_.jpg"
-      ],
-      "createdAt": "2026-09-17T15:15:43.948Z",
-      "updatedAt": "2026-09-17T17:39:14.580Z"
-    }
+    {"id":"manual-1789586567365","mangaId":"one-piece","number":1194,"title":"ワンピース raw ( One Piece raw ) 第1194話","slug":"one-piece-raw-1194","country":"JP","pages":[],"createdAt":"2026-09-16T19:22:46.422Z","updatedAt":"2026-09-17T17:38:49.554Z"},
+    {"id":"manual-1789586997631","mangaId":"days","number":276,"title":"SAKAMOTO DAYS – サカモトデイズ raw 第276話","slug":"sakamoto-raw-276","country":"JP","pages":[],"createdAt":"2026-09-16T19:29:56.478Z","updatedAt":"2026-09-17T17:48:16.803Z"},
+    {"id":"manual-1789587026015","mangaId":"days","number":275,"title":"SAKAMOTO DAYS – サカモトデイズ raw 第275話","slug":"sakamoto-raw-275","country":"JP","pages":[],"createdAt":"2026-09-16T19:30:25.373Z","updatedAt":"2026-09-17T19:34:30.860Z"},
+    {"id":"manual-1789655571692","mangaId":"the-fragrant-flowers-bloom-dignifiedly","number":202,"title":"薫る花は凛と咲くraw ( The fragrant flowers bloom dignifiedly raw ) 第202話","slug":"the-fragrant-raw-202","country":"JP","pages":[],"createdAt":"2026-09-17T14:32:50.690Z","updatedAt":"2026-09-17T17:40:41.189Z"},
+    {"id":"manual-1789658144840","mangaId":"boku-to-roboko","number":297,"title":"僕とロボコ raw ( BOKU TO ROBOKO raw ) 第297話","slug":"boku-to-roboko-raw-297","country":"JP","pages":[],"createdAt":"2026-09-17T15:15:43.948Z","updatedAt":"2026-09-17T17:39:14.580Z"}
   ]
 }
