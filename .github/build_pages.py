@@ -48,7 +48,6 @@ for item in BUILD.iterdir():
     if item.is_dir(): shutil.copytree(item,target,dirs_exist_ok=True)
     else: shutil.copy2(item,target)
 
-# Include live repository media uploaded by the admin uploader in the Pages artifact.
 for live_dir in ["chapter-images", "manga-covers"]:
     source = ROOT / live_dir
     target = DIST / live_dir
@@ -69,8 +68,6 @@ def chapter_time(c): return str(c.get("updatedAt") or c.get("updated_at") or c.g
 def manga_for(c): return manga_map.get(str(c.get("mangaId") or c.get("manga_id") or "").lower(),{})
 chapters.sort(key=chapter_time, reverse=True)
 
-# Render the homepage feed at build time. The page therefore remains populated
-# even if browser-side fetch() is blocked or stale.
 index=DIST/"index.html"
 if index.exists() and chapters:
     text=index.read_text(encoding="utf-8")
@@ -83,6 +80,9 @@ if index.exists() and chapters:
         items.append('<a href="'+href+'"><div><strong>'+label+'</strong><span>Chapter '+num+'</span></div><b>Read →</b></a>')
     static='<section class="home-static"><div class="home-head"><div><span>LATEST RELEASES</span><h2>Latest Chapters</h2><p>Newest posted or updated chapters.</p></div><a href="/latest-chapters.html">View all →</a></div><div class="home-grid">'+''.join(cards)+'</div><div class="home-list">'+''.join(items)+'</div></section>'
     text=re.sub(r'<main id="app" class="section">.*?</main>', '<main id="app" class="section">'+static+'</main>', text, count=1, flags=re.S)
+    # The homepage is now fully static. Do not let the legacy runtime homepage
+    # script replace the build-time HTML with an empty/error state.
+    text=re.sub(r'<script[^>]+src=["\']/homepage-system\.js[^>]*></script>','',text,flags=re.I)
     index.write_text(text,encoding="utf-8")
 
 urls=[("https://mangagoraw.github.io/", ""),("https://mangagoraw.github.io/latest-chapters.html", "2026-09-17")]
