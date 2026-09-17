@@ -1,46 +1,10 @@
 {
-  "version": 1,
+  "version": 2,
   "mangas": [
-    {
-      "id": "the-fragrant-flowers-bloom-dignifiedly",
-      "title": "The Fragrant Flowers Bloom Dignifiedly",
-      "native_title": "薫る花は凛と咲く",
-      "country": "JP",
-      "language": "ja",
-      "cover": "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/manga-covers/the-fragrant-flowers-bloom-dignifiedly/1789667371729-img_kv2.jpg",
-      "slug": "the-fragrant-flowers-bloom-dignifiedly",
-      "updated_at": "2026-09-17T17:49:31.702Z"
-    },
-    {
-      "id": "one-piece",
-      "title": "One Piece",
-      "native_title": "ワンピース",
-      "country": "JP",
-      "language": "ja",
-      "cover": "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/manga-covers/one-piece/1789667418337-______raw___One_piece_raw__.webp",
-      "slug": "one-piece",
-      "updated_at": "2026-09-17T17:50:18.334Z"
-    },
-    {
-      "id": "days",
-      "title": "SakaMoto DAYS",
-      "country": "JP",
-      "language": "ja",
-      "cover": "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/manga-covers/days/1789667403096-_______.jpg",
-      "slug": "days",
-      "native_title": "",
-      "updated_at": "2026-09-17T17:50:03.084Z"
-    },
-    {
-      "id": "boku-to-roboko",
-      "title": "BOKU TO ROBOKO",
-      "native_title": "僕とロボコ",
-      "country": "JP",
-      "language": "ja",
-      "cover": "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/manga-covers/boku-to-roboko/1789667349988-71X9QX_xG5L._UF1000_1000_QL80_.jpg",
-      "slug": "boku-to-roboko",
-      "updated_at": "2026-09-17T17:49:09.976Z"
-    }
+    {"id":"the-fragrant-flowers-bloom-dignifiedly","title":"The Fragrant Flowers Bloom Dignifiedly","native_title":"薫る花は凛と咲く","country":"JP","language":"ja","cover":"","slug":"the-fragrant-flowers-bloom-dignifiedly","updated_at":"2026-09-17T17:49:31.702Z"},
+    {"id":"one-piece","title":"One Piece","native_title":"ワンピース","country":"JP","language":"ja","cover":"","slug":"one-piece","updated_at":"2026-09-17T17:50:18.334Z"},
+    {"id":"days","title":"SakaMoto DAYS","country":"JP","language":"ja","cover":"","slug":"days","native_title":"","updated_at":"2026-09-17T17:50:03.084Z"},
+    {"id":"boku-to-roboko","title":"BOKU TO ROBOKO","native_title":"僕とロボコ","country":"JP","language":"ja","cover":"","slug":"boku-to-roboko","updated_at":"2026-09-17T17:49:09.976Z"}
   ],
   "chapters": []
 }
