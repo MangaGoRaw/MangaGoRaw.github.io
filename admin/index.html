@@ -1,1 +1,49 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MangaGoRaw Admin</title><style>body{font:16px system-ui;background:#08090d;color:#eee;max-width:800px;margin:50px auto;padding:20px}a{color:#9fc2ff}.box{padding:25px;border:1px solid #293142;border-radius:16px;background:#111722}li{margin:15px 0}</style></head><body><div class="box"><h1>MangaGoRaw Admin</h1><p>GitHub-backed static administration.</p><ul><li><a href="/">Public site</a></li><li><a href="https://github.com/MangaGoRaw/MangaGoRaw.github.io">Repository</a></li></ul><p>GitHub tokens must be supplied at runtime by the operator; never hard-code secrets.</p></div></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MangaGoRaw Admin</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;font:15px system-ui,-apple-system,Segoe UI,sans-serif;background:#080b12;color:#eef2f8}main{max-width:1100px;margin:32px auto;padding:0 18px}.card{background:#111722;border:1px solid #293142;border-radius:14px;padding:18px;margin:14px 0}h1,h2{margin-top:0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}@media(max-width:700px){.grid{grid-template-columns:1fr}}label{display:block;font-size:12px;color:#aeb8c9;margin-bottom:5px}input,textarea,button{width:100%;border-radius:9px;border:1px solid #344056;background:#0b1019;color:#fff;padding:10px;font:inherit}textarea{min-height:110px;resize:vertical}button{cursor:pointer;background:#1b6eea;border-color:#1b6eea;font-weight:650}button.secondary{background:#151d2a;border-color:#344056}.row{display:flex;gap:8px;flex-wrap:wrap}.row button{width:auto}.status{padding:10px;border-radius:9px;background:#0b1019;color:#b9c5d8;white-space:pre-wrap}.chapter{border:1px solid #2a3445;border-radius:10px;padding:12px;margin:9px 0}.chapter b{display:block;margin-bottom:5px}.muted{color:#9ba7ba;font-size:13px}.danger{background:#5c2027;border-color:#7d3039}.ok{color:#7ee2a8}.err{color:#ff8e9a}.hint{line-height:1.5}
+</style></head>
+<body><main>
+<h1>MangaGoRaw Admin</h1>
+<p class="muted">Static GitHub-backed administration. Changes are committed directly to the selected repository; no token is stored in the site.</p>
+<div class="card"><h2>GitHub connection</h2><div class="grid">
+<div><label>Repository owner</label><input id="owner" value="MangaGoRaw"></div>
+<div><label>Repository</label><input id="repo" value="MangaGoRaw.github.io"></div>
+<div><label>Branch</label><input id="branch" value="main"></div>
+<div><label>GitHub token (runtime only)</label><input id="token" type="password" autocomplete="off" placeholder="github_pat_…"></div>
+</div><div class="row" style="margin-top:12px"><button id="load">Load chapters</button><button class="secondary" id="clear">Clear token</button></div>
+<p class="hint muted">Use a fine-grained GitHub token with Contents: Read and write for this repository. Do not paste a token into site files, commits, or public messages.</p><div id="status" class="status">Not connected.</div></div>
+
+<div class="card"><h2>Chapter editor</h2><div class="grid">
+<div><label>ID</label><input id="id" placeholder="auto-generated"></div>
+<div><label>Manga ID</label><input id="mangaId" placeholder="one-piece"></div>
+<div><label>Chapter number</label><input id="number" type="number" step="1"></div>
+<div><label>Country</label><input id="country" value="JP"></div>
+</div>
+<div style="margin-top:12px"><label>Title</label><input id="title"></div>
+<div style="margin-top:12px"><label>Slug</label><input id="slug"></div>
+<div style="margin-top:12px"><label>Pages (one path/URL per line)</label><textarea id="pages" placeholder="chapter-images/example/chapter-1/0001.jpg"></textarea></div>
+<div class="row" style="margin-top:12px"><button id="save">Add / update chapter</button><button class="secondary" id="reset">New chapter</button></div></div>
+
+<div class="card"><h2>Published chapters</h2><div id="list" class="muted">Load the chapter data first.</div></div>
+
+<div class="card"><h2>What this admin can change</h2><p class="hint muted">It edits <code>data/manual-chapters.json</code> through the GitHub Contents API. The Pages build also preserves this file instead of overwriting it from the original ZIP. Image binaries are intentionally not uploaded by this panel; add authorized media to the repository separately, then enter their relative paths in the Pages field.</p></div>
+</main>
+<script>
+const $=id=>document.getElementById(id);let data={version:1,chapters:[]};let loadedSha=null;
+function cfg(){return {owner:$('owner').value.trim(),repo:$('repo').value.trim(),branch:$('branch').value.trim()||'main'};}
+function setStatus(t,cls=''){ $('status').textContent=t;$('status').className='status '+cls; }
+function api(path,opts={}){const token=$('token').value.trim();const headers={'Accept':'application/vnd.github+json'};if(token)headers.Authorization='Bearer '+token;if(opts.body)headers['Content-Type']='application/json';return fetch('https://api.github.com/repos/'+cfg().owner+'/'+cfg().repo+'/contents/'+path+'?ref='+encodeURIComponent(cfg().branch),{...opts,headers}).then(async r=>{const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error((j.message||r.statusText)+' ('+r.status+')');return j});}
+function b64decode(s){const bytes=Uint8Array.from(atob(s.replace(/\n/g,'')),c=>c.charCodeAt(0));return new TextDecoder().decode(bytes)}
+function b64encode(s){const bytes=new TextEncoder().encode(s);let out='';for(let i=0;i<bytes.length;i+=0x8000)out+=String.fromCharCode(...bytes.subarray(i,i+0x8000));return btoa(out)}
+function render(){const el=$('list');if(!data.chapters.length){el.textContent='No chapters.';return}el.innerHTML='';data.chapters.forEach((c,i)=>{const d=document.createElement('div');d.className='chapter';d.innerHTML='<b>'+esc(c.title||('Chapter '+c.number))+'</b><span class="muted">'+esc(c.mangaId||'')+' · #'+esc(String(c.number??''))+' · '+esc(c.slug||'')+' · '+((c.pages||[]).length)+' page(s)</span><div class="row" style="margin-top:9px"><button data-edit="'+i+'" class="secondary">Edit</button><button data-del="'+i+'" class="danger">Delete</button></div>';el.appendChild(d)});}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+function reset(){['id','mangaId','number','title','slug','pages'].forEach(x=>$(x).value='');$('country').value='JP';}
+async function load(){try{setStatus('Loading data…');const j=await api('data/manual-chapters.json');loadedSha=j.sha;data=JSON.parse(b64decode(j.content));if(!Array.isArray(data.chapters))data.chapters=[];render();setStatus('Loaded '+data.chapters.length+' chapter(s).','ok');}catch(e){setStatus('Load failed: '+e.message,'err')}}
+async function save(){try{if(!loadedSha)throw new Error('Load chapters first.');const n=Number($('number').value);if(!$('mangaId').value.trim()||!Number.isFinite(n)||!$('slug').value.trim())throw new Error('Manga ID, chapter number and slug are required.');const c={id:$('id').value.trim()||('manual-'+Date.now()),mangaId:$('mangaId').value.trim(),number:n,title:$('title').value.trim(),slug:$('slug').value.trim(),country:$('country').value.trim()||'JP',pages:$('pages').value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean)};const idx=data.chapters.findIndex(x=>x.id===c.id);if(idx>=0)data.chapters[idx]=c;else data.chapters.unshift(c);const body=JSON.stringify(data,null,2)+'\n';setStatus('Saving commit…');const j=await fetch('https://api.github.com/repos/'+cfg().owner+'/'+cfg().repo+'/contents/data/manual-chapters.json',{method:'PUT',headers:{'Accept':'application/vnd.github+json','Content-Type':'application/json','Authorization':'Bearer '+$('token').value.trim()},body:JSON.stringify({message:'Admin: update chapter metadata',content:b64encode(body),sha:loadedSha,branch:cfg().branch})}).then(async r=>{const x=await r.json();if(!r.ok)throw new Error((x.message||r.statusText)+' ('+r.status+')');return x});loadedSha=j.content.sha;render();reset();setStatus('Saved successfully. GitHub Pages will rebuild automatically.','ok');}catch(e){setStatus('Save failed: '+e.message,'err')}}
+$('load').onclick=load;$('save').onclick=save;$('reset').onclick=reset;$('clear').onclick=()=>{$('token').value='';setStatus('Token cleared from this page.');};
+$('list').onclick=async e=>{const edit=e.target.dataset.edit,del=e.target.dataset.del;if(edit!==undefined){const c=data.chapters[+edit];$('id').value=c.id||'';$('mangaId').value=c.mangaId||'';$('number').value=c.number??'';$('title').value=c.title||'';$('slug').value=c.slug||'';$('country').value=c.country||'JP';$('pages').value=(c.pages||[]).join('\n');scrollTo({top:document.body.scrollHeight,behavior:'smooth'});}if(del!==undefined){if(!confirm('Delete this chapter from the GitHub data file?'))return;try{data.chapters.splice(+del,1);const body=JSON.stringify(data,null,2)+'\n';setStatus('Saving deletion…');const j=await fetch('https://api.github.com/repos/'+cfg().owner+'/'+cfg().repo+'/contents/data/manual-chapters.json',{method:'PUT',headers:{'Accept':'application/vnd.github+json','Content-Type':'application/json','Authorization':'Bearer '+$('token').value.trim()},body:JSON.stringify({message:'Admin: delete chapter metadata',content:b64encode(body),sha:loadedSha,branch:cfg().branch})}).then(async r=>{const x=await r.json();if(!r.ok)throw new Error((x.message||r.statusText)+' ('+r.status+')');return x});loadedSha=j.content.sha;render();setStatus('Deleted and committed.','ok');}catch(e){setStatus('Delete failed: '+e.message,'err')}}};
+</script></body></html>
