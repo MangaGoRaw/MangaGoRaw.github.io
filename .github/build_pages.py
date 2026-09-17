@@ -18,7 +18,7 @@ if not ARCHIVE.exists():
     raise SystemExit("Mangareader-final.zip not found")
 
 # Rebuild the supplied static site while intentionally excluding scan/covers
-# from the public Pages artifact. The owner can add authorized media later.
+# from the public Pages artifact. Authorized media can be added separately.
 with ZipFile(ARCHIVE) as z:
     for info in z.infolist():
         name = info.filename.replace("\\", "/")
@@ -57,8 +57,12 @@ for path in BUILD.rglob("*"):
             text = text.replace(tag, "")
     path.write_text(text, encoding="utf-8")
 
-# The current MangaGoRaw entry points take precedence over archived versions.
-OVERRIDES = ["index.html", "chapter.html", "manga.html", "latest-chapters.html", "robots.txt", "sitemap.xml", "analytics.js"]
+# Current MangaGoRaw entry points and admin-managed data take precedence.
+OVERRIDES = [
+    "index.html", "chapter.html", "manga.html", "latest-chapters.html",
+    "robots.txt", "sitemap.xml", "analytics.js", "data/manual-chapters.json"
+]
+
 for name in OVERRIDES:
     source = ROOT / name
     if source.exists():
@@ -77,7 +81,9 @@ for item in BUILD.iterdir():
 for name in OVERRIDES:
     source = ROOT / name
     if source.exists():
-        shutil.copy2(source, DIST / name)
+        target = DIST / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, target)
 
 (DIST / ".nojekyll").touch()
-print(f"Built {DIST} successfully without scan/covers.")
+print(f"Built {DIST} successfully without scan/covers; admin chapter metadata preserved.")
