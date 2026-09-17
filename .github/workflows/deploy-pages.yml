@@ -27,6 +27,29 @@ jobs:
       - name: Build static site
         run: python3 .github/build_pages.py
 
+      - name: Apply site verification and analytics
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          dist = Path('dist')
+          ga_id = 'G-HC32QHLNXB'
+          verification = 'IKaTiLHBDaKfdoCrKcZKlAQV1WLKUmYJxjK6uVFr8MM'
+          analytics = f'''(function(){{'use strict';var ID='{ga_id}';if(!window.__mangaGoRawGA){{window.__mangaGoRawGA=true;window.dataLayer=window.dataLayer||[];window.gtag=function(){{dataLayer.push(arguments)}};gtag('js',new Date());gtag('config',ID,{{send_page_view:true}});var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(ID);document.head.appendChild(s);}}window.mangaGoRawAnalytics={{pageView:function(p){{if(window.gtag)window.gtag('event','page_view',p||{{}})}},event:function(n,p){{if(window.gtag)window.gtag('event',n,p||{{}})}}}};}})();\n'''
+          (dist/'analytics.js').write_text(analytics, encoding='utf-8')
+          for p in dist.rglob('*.html'):
+              text = p.read_text(encoding='utf-8')
+              # Remove legacy Google Analytics / Tag Manager snippets and duplicate verification tags.
+              text = re.sub(r'<script[^>]+googletagmanager\.com/gtag/js[^>]*></script>', '', text, flags=re.I)
+              text = re.sub(r'<script[^>]*>[^<]*(?:gtag|GoogleAnalyticsObject|google-analytics)[\s\S]*?</script>', '', text, flags=re.I)
+              text = re.sub(r'<meta[^>]+name=["\']google-site-verification["\'][^>]*>', '', text, flags=re.I)
+              verification_tag = f'<meta name="google-site-verification" content="{verification}">'
+              text = text.replace('</head>', verification_tag + '</head>', 1) if p.name == 'index.html' else text
+              if not re.search(r'<script[^>]+src=["\']/analytics\.js(?:\?[^"\']*)?["\'][^>]*></script>', text, flags=re.I):
+                  text = text.replace('</head>', '<script src="/analytics.js?v=1"></script></head>', 1)
+              p.write_text(text, encoding='utf-8')
+          PY
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
