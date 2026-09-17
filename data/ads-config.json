@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "enabled": false,
+  "sections": [
+    {"id":"ad-1","name":"Ad Section 1","enabled":false},
+    {"id":"ad-2","name":"Ad Section 2","enabled":false},
+    {"id":"ad-3","name":"Ad Section 3","enabled":false},
+    {"id":"ad-4","name":"Ad Section 4","enabled":false},
+    {"id":"ad-5","name":"Ad Section 5","enabled":false},
+    {"id":"ad-6","name":"Ad Section 6","enabled":false},
+    {"id":"ad-7","name":"Ad Section 7","enabled":false},
+    {"id":"ad-8","name":"Ad Section 8","enabled":false},
+    {"id":"ad-9","name":"Ad Section 9","enabled":false}
+  ]
+}
