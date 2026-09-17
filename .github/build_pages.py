@@ -1,6 +1,7 @@
 from pathlib import Path
 from zipfile import ZipFile
-import shutil, json
+import shutil, json, html, re
+from urllib.parse import quote
 from xml.sax.saxutils import escape
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -48,13 +49,10 @@ for item in BUILD.iterdir():
     else: shutil.copy2(item,target)
 
 # Include live repository media uploaded by the admin uploader in the Pages artifact.
-# The ZIP intentionally excludes these directories, so without this step uploaded
-# chapter pages exist in data/manual-chapters.json but their images are missing from dist.
 for live_dir in ["chapter-images", "manga-covers"]:
     source = ROOT / live_dir
     target = DIST / live_dir
-    if source.exists():
-        shutil.copytree(source, target, dirs_exist_ok=True)
+    if source.exists(): shutil.copytree(source, target, dirs_exist_ok=True)
 
 for name in ["data/content.json","data/manual-chapters.json","data/extra-chapters.json","data/upcoming-chapters.json","data/ads-config.json"]:
     source=ROOT/name
@@ -63,12 +61,35 @@ for name in ["data/content.json","data/manual-chapters.json","data/extra-chapter
 
 content=json.loads((DIST/"data/content.json").read_text(encoding="utf-8"))
 manual=json.loads((DIST/"data/manual-chapters.json").read_text(encoding="utf-8"))
-mangas=content.get("mangas",[]); chapters=[c for c in manual.get("chapters",[]) if c.get("slug") and c.get("pages")]
+mangas=content.get("mangas",[])
+chapters=[c for c in manual.get("chapters",[]) if c.get("slug")]
+manga_map={str(m.get("id") or m.get("slug") or "").lower():m for m in mangas}
+
+def chapter_time(c): return str(c.get("updatedAt") or c.get("updated_at") or c.get("createdAt") or c.get("created_at") or "")
+def manga_for(c): return manga_map.get(str(c.get("mangaId") or c.get("manga_id") or "").lower(),{})
+chapters.sort(key=chapter_time, reverse=True)
+
+# Render the homepage feed at build time. The page therefore remains populated
+# even if browser-side fetch() is blocked or stale.
+index=DIST/"index.html"
+if index.exists() and chapters:
+    text=index.read_text(encoding="utf-8")
+    cards=[]; items=[]
+    for i,c in enumerate(chapters[:10]):
+        m=manga_for(c); name=m.get("title") or c.get("mangaId") or "Manga"; number=c.get("number","")
+        slug=str(c.get("slug") or ""); href="/chapter.html?slug="+quote(slug,safe="")
+        label=html.escape(str(name)); num=html.escape(str(number)); cls=" featured" if i==0 else ""
+        cards.append('<a class="home-card'+cls+'" href="'+href+'"><div class="ma-home-cover-fallback">M</div><div class="home-overlay"><small>Latest release</small><strong>'+label+'</strong><b>Chapter '+num+'</b></div></a>')
+        items.append('<a href="'+href+'"><div><strong>'+label+'</strong><span>Chapter '+num+'</span></div><b>Read →</b></a>')
+    static='<section class="home-static"><div class="home-head"><div><span>LATEST RELEASES</span><h2>Latest Chapters</h2><p>Newest posted or updated chapters.</p></div><a href="/latest-chapters.html">View all →</a></div><div class="home-grid">'+''.join(cards)+'</div><div class="home-list">'+''.join(items)+'</div></section>'
+    text=re.sub(r'<main id="app" class="section">.*?</main>', '<main id="app" class="section">'+static+'</main>', text, count=1, flags=re.S)
+    index.write_text(text,encoding="utf-8")
+
 urls=[("https://mangagoraw.github.io/", ""),("https://mangagoraw.github.io/latest-chapters.html", "2026-09-17")]
 for m in mangas:
     slug=m.get("slug") or m.get("id")
     if slug: urls.append(("https://mangagoraw.github.io/manga.html?slug="+slug,str(m.get("updated_at") or "")[:10]))
-for c in chapters: urls.append(("https://mangagoraw.github.io/chapter.html?slug="+str(c["slug"]),str(c.get("updatedAt") or c.get("updated_at") or "")[:10]))
+for c in [c for c in chapters if c.get("pages")]: urls.append(("https://mangagoraw.github.io/chapter.html?slug="+str(c["slug"]),str(c.get("updatedAt") or c.get("updated_at") or "")[:10]))
 seen=set(); lines=['<?xml version="1.0" encoding="UTF-8"?>','<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
 for url,date in urls:
     if url in seen: continue
@@ -76,4 +97,4 @@ for url,date in urls:
 lines.append("</urlset>"); (DIST/"sitemap.xml").write_text("\n".join(lines)+"\n",encoding="utf-8")
 (DIST/"robots.txt").write_text("User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: https://mangagoraw.github.io/sitemap.xml\n",encoding="utf-8")
 (DIST/".nojekyll").touch()
-print(f"Built {DIST} successfully.")
+print(f"Built {DIST} successfully with {len(chapters)} homepage chapters.")
