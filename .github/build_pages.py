@@ -64,8 +64,27 @@ mangas=content.get("mangas",[])
 chapters=[c for c in manual.get("chapters",[]) if c.get("slug")]
 manga_map={str(m.get("id") or m.get("slug") or "").lower():m for m in mangas}
 
+# Existing repository cover files. Use these when the data record has no explicit cover.
+cover_files={
+    "one-piece":"1789667418337-______raw___One_piece_raw__.webp",
+    "days":"1789667403096-_______.jpg",
+    "the-fragrant-flowers-bloom-dignifiedly":"1789667371729-img_kv2.jpg",
+    "boku-to-roboko":"1789667349988-71X9QX_xG5L._UF1000_1000_QL80_.jpg",
+}
+
 def chapter_time(c): return str(c.get("updatedAt") or c.get("updated_at") or c.get("createdAt") or c.get("created_at") or "")
 def manga_for(c): return manga_map.get(str(c.get("mangaId") or c.get("manga_id") or "").lower(),{})
+def cover_for(m):
+    cover=str(m.get("cover") or "").strip()
+    mid=str(m.get("id") or m.get("slug") or "").lower()
+    if cover:
+        if cover.startswith("http"):
+            return cover
+        return "/"+cover.lstrip("/")
+    filename=cover_files.get(mid)
+    if filename:
+        return "/manga-covers/"+quote(mid,safe="")+"/"+quote(filename,safe="")
+    return ""
 chapters.sort(key=chapter_time, reverse=True)
 
 index=DIST/"index.html"
@@ -76,12 +95,15 @@ if index.exists() and chapters:
         m=manga_for(c); name=m.get("title") or c.get("mangaId") or "Manga"; number=c.get("number","")
         slug=str(c.get("slug") or ""); href="/chapter.html?slug="+quote(slug,safe="")
         label=html.escape(str(name)); num=html.escape(str(number)); cls=" featured" if i==0 else ""
-        cards.append('<a class="home-card'+cls+'" href="'+href+'"><div class="ma-home-cover-fallback">M</div><div class="home-overlay"><small>Latest release</small><strong>'+label+'</strong><b>Chapter '+num+'</b></div></a>')
+        cover=cover_for(m)
+        if cover:
+            visual='<img src="'+html.escape(cover,quote=True)+'" alt="'+label+' cover" loading="lazy" decoding="async">'
+        else:
+            visual='<div class="ma-home-cover-fallback" aria-hidden="true">M</div>'
+        cards.append('<a class="home-card'+cls+'" href="'+href+'">'+visual+'<div class="home-overlay"><small>Latest release</small><strong>'+label+'</strong><b>Chapter '+num+'</b></div></a>')
         items.append('<a href="'+href+'"><div><strong>'+label+'</strong><span>Chapter '+num+'</span></div><b>Read →</b></a>')
     static='<section class="home-static"><div class="home-head"><div><span>LATEST RELEASES</span><h2>Latest Chapters</h2><p>Newest posted or updated chapters.</p></div><a href="/latest-chapters.html">View all →</a></div><div class="home-grid">'+''.join(cards)+'</div><div class="home-list">'+''.join(items)+'</div></section>'
     text=re.sub(r'<main id="app" class="section">.*?</main>', '<main id="app" class="section">'+static+'</main>', text, count=1, flags=re.S)
-    # The homepage is now fully static. Do not let the legacy runtime homepage
-    # script replace the build-time HTML with an empty/error state.
     text=re.sub(r'<script[^>]+src=["\']/homepage-system\.js[^>]*></script>','',text,flags=re.I)
     index.write_text(text,encoding="utf-8")
 
@@ -97,4 +119,4 @@ for url,date in urls:
 lines.append("</urlset>"); (DIST/"sitemap.xml").write_text("\n".join(lines)+"\n",encoding="utf-8")
 (DIST/"robots.txt").write_text("User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: https://mangagoraw.github.io/sitemap.xml\n",encoding="utf-8")
 (DIST/".nojekyll").touch()
-print(f"Built {DIST} successfully with {len(chapters)} homepage chapters.")
+print(f"Built {DIST} successfully with {len(chapters)} homepage chapters and cover-aware cards.")
