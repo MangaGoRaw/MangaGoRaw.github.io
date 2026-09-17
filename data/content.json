@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "mangas": [
+    {"id":"the-fragrant-flowers-bloom-dignifiedly","title":"The Fragrant Flowers Bloom Dignifiedly","native_title":"薫る花は凛と咲く","country":"JP","language":"ja","cover":"https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/manga-covers/the-fragrant-flowers-bloom-dignifiedly/1789579751038-img_kv2.jpg","slug":"the-fragrant-flowers-bloom-dignifiedly","updated_at":"2026-09-16T17:29:11.035Z"},
+    {"id":"one-piece","title":"One Piece","native_title":"ワンピース","country":"JP","language":"ja","cover":"https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/manga-covers/one-piece/1789577268502-______raw___One_piece_raw__.webp","slug":"one-piece","updated_at":"2026-09-16T16:47:48.491Z"},
+    {"id":"days","title":"DAYS","country":"JP","language":"ja","cover":"https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/manga-covers/days/cover-1788579905381.webp","slug":"days"},
+    {"id":"boku-to-roboko","title":"BOKU TO ROBOKO","native_title":"僕とロボコ","country":"JP","language":"ja","cover":"https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/manga-covers/boku-to-roboko/1789579519967-71X9QX_xG5L._UF1000_1000_QL80_.jpg","slug":"boku-to-roboko","updated_at":"2026-09-16T17:25:19.965Z"}
+  ],
+  "chapters": []
+}
