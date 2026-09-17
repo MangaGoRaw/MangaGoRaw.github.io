@@ -42,12 +42,30 @@ jobs:
               # Remove legacy Google Analytics / Tag Manager snippets and duplicate verification tags.
               text = re.sub(r'<script[^>]+googletagmanager\.com/gtag/js[^>]*></script>', '', text, flags=re.I)
               text = re.sub(r'<script[^>]*>[^<]*(?:gtag|GoogleAnalyticsObject|google-analytics)[\s\S]*?</script>', '', text, flags=re.I)
+              # The homepage feed is rendered statically during the build. Remove the
+              # legacy runtime renderer so it cannot replace the populated feed with an empty state.
+              text = re.sub(r'<script[^>]+src=["\']/homepage-system\.js(?:\?[^"\']*)?["\'][^>]*></script>', '', text, flags=re.I)
               text = re.sub(r'<meta[^>]+name=["\']google-site-verification["\'][^>]*>', '', text, flags=re.I)
               verification_tag = f'<meta name="google-site-verification" content="{verification}">'
               text = text.replace('</head>', verification_tag + '</head>', 1) if p.name == 'index.html' else text
               if not re.search(r'<script[^>]+src=["\']/analytics\.js(?:\?[^"\']*)?["\'][^>]*></script>', text, flags=re.I):
                   text = text.replace('</head>', '<script src="/analytics.js?v=1"></script></head>', 1)
               p.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Verify homepage build
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p = Path('dist/index.html')
+          text = p.read_text(encoding='utf-8')
+          cards = len(re.findall(r'class=["\']home-card', text))
+          if cards < 1:
+              raise SystemExit(f'Homepage verification failed: only {cards} cards found')
+          if 'homepage-system.js' in text:
+              raise SystemExit('Homepage verification failed: legacy homepage runtime is still loaded')
+          print(f'Homepage verified: {cards} cards rendered statically and runtime homepage script removed.')
           PY
 
       - name: Upload Pages artifact
