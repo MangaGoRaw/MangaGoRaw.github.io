@@ -100,9 +100,12 @@
       "title": "ブルーロック raw ( Blue Lock raw ) 第362話",
       "slug": "blue-lock-raw-362",
       "country": "JP",
-      "pages": [],
+      "pages": [
+        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/blue-lock/chapter-blue-lock-raw-362/.upload-1789724222859/0001-1.jpg",
+        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/blue-lock/chapter-blue-lock-raw-362/.upload-1789724222859/0002-2.jpg"
+      ],
       "createdAt": "2026-09-18T08:19:32.056Z",
-      "updatedAt": "2026-09-18T08:19:32.056Z"
+      "updatedAt": "2026-09-18T09:37:10.970Z"
     }
   ]
 }
