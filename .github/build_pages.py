@@ -107,11 +107,11 @@ if index.exists() and chapters:
     text=re.sub(r'<script[^>]+src=["\']/homepage-system\.js[^>]*></script>','',text,flags=re.I)
     index.write_text(text,encoding="utf-8")
 
-urls=[("https://mangagoraw.github.io/", ""),("https://mangagoraw.github.io/latest-chapters.html", "2026-09-17")]
+urls=[("https://mangagoraw.github.io/", ""),("https://mangagoraw.github.io/latest-chapters.html", "2026-09-17"),("https://mangagoraw.github.io/manga.html", "")]
 for m in mangas:
     slug=m.get("slug") or m.get("id")
     if slug: urls.append(("https://mangagoraw.github.io/manga.html?slug="+slug,str(m.get("updated_at") or "")[:10]))
-for c in [c for c in chapters if c.get("pages")]: urls.append(("https://mangagoraw.github.io/chapter.html?slug="+str(c["slug"]),str(c.get("updatedAt") or c.get("updated_at") or "")[:10]))
+for c in [c for c in chapters if c.get("pages")]: urls.append(("https://mangagoraw.github.io/chapter.html?slug="+quote(str(c["slug"]),safe=""),str(c.get("updatedAt") or c.get("updated_at") or c.get("createdAt") or c.get("created_at") or "")[:10]))
 seen=set(); lines=['<?xml version="1.0" encoding="UTF-8"?>','<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
 for url,date in urls:
     if url in seen: continue
