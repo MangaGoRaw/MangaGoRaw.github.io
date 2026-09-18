@@ -77,7 +77,7 @@
     {
       "country": "JP",
       "language": "ja",
-      "cover": "",
+      "cover": "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/manga-covers/adults-war/1789750832316-61AdhOYWu4L.jpg",
       "status": "ongoing",
       "author": "",
       "artist": "",
@@ -85,7 +85,8 @@
       "id": "adults-war",
       "slug": "adults-war",
       "title": "Adults War",
-      "native_title": "大人大戦 Raw"
+      "native_title": "大人大戦 Raw",
+      "updated_at": "2026-09-18T17:00:32.314Z"
     }
   ],
   "chapters": [
