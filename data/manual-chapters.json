@@ -126,6 +126,22 @@
       ],
       "createdAt": "2026-09-18T08:19:32.056Z",
       "updatedAt": "2026-09-18T09:37:10.970Z"
+    },
+    {
+      "id": "manual-boruto-two-blue-vortex-117",
+      "mangaId": "boruto-two-blue-vortex",
+      "number": 117,
+      "title": "# ボルト raw ( Boruto raw ) -TWO BLUE VORTEX 第117話",
+      "slug": "boruto-two-blue-vortex-raw-117",
+      "pages": []
+    },
+    {
+      "id": "manual-adults-war-65",
+      "mangaId": "adults-war",
+      "number": 65,
+      "title": "大人大戦 Raw 第65話",
+      "slug": "adults-war-raw-65",
+      "pages": []
     }
   ]
 }
