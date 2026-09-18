@@ -53,6 +53,43 @@ jobs:
               p.write_text(text, encoding='utf-8')
           PY
 
+      - name: Verify chapter image pipeline
+        shell: python
+        run: |
+          import json
+          from pathlib import Path
+          from urllib.parse import urlparse
+          dist=Path("dist")
+          sources=["data/content.json","data/manual-chapters.json","data/upcoming-chapters.json","data/extra-chapters.json"]
+          by_slug={}
+          for name in sources:
+              p=dist/name
+              if not p.exists(): continue
+              data=json.loads(p.read_text(encoding="utf-8"))
+              for c in data.get("chapters",[]):
+                  slug=str(c.get("slug") or "").strip().lower()
+                  if not slug: continue
+                  pages=c.get("pages") or []
+                  old=by_slug.get(slug,{})
+                  if len(pages)>len(old.get("pages") or []): by_slug[slug]=c
+          published=0
+          for slug,c in by_slug.items():
+              pages=c.get("pages") or []
+              if not pages: continue
+              published+=1
+              for page in pages:
+                  value=page if isinstance(page,str) else (page.get("path") or page.get("url") or page.get("src") or "")
+                  value=str(value)
+                  raw="https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/"
+                  if value.startswith(raw): value=value[len(raw):]
+                  elif value.startswith("https://mangagoraw.github.io/"): value=value[len("https://mangagoraw.github.io/"):]
+                  value=value.lstrip("/")
+                  if not (dist/value).is_file(): raise SystemExit(f"Missing chapter image for {slug}: {value}")
+          if published < 1: raise SystemExit("No chapter with attached images was found in build data")
+          chapter_html=(dist/"chapter.html").read_text(encoding="utf-8")
+          if "data/manual-chapters.json" not in chapter_html: raise SystemExit("chapter.html is not wired to manual chapter data")
+          print(f"Verified {published} image-backed chapter(s) and all referenced image files.")
+
       - name: Verify homepage build
         run: |
           python3 - <<'PY'
