@@ -81,6 +81,28 @@
       ],
       "createdAt": "2026-09-17T15:15:43.948Z",
       "updatedAt": "2026-09-17T18:21:15.641Z"
+    },
+    {
+      "id": "manual-four-knights-254",
+      "mangaId": "the-four-knights-of-the-apocalypse",
+      "number": 254,
+      "title": "黙示録の四騎士 Raw ( THE FOUR KNIGHTS OF THE APOCALYPSE raw ) 第254話",
+      "slug": "the-four-knights-of-the-apocalypse-raw-254",
+      "country": "JP",
+      "pages": [],
+      "createdAt": "2026-09-18T08:19:32.056Z",
+      "updatedAt": "2026-09-18T08:19:32.056Z"
+    },
+    {
+      "id": "manual-blue-lock-362",
+      "mangaId": "blue-lock",
+      "number": 362,
+      "title": "ブルーロック raw ( Blue Lock raw ) 第362話",
+      "slug": "blue-lock-raw-362",
+      "country": "JP",
+      "pages": [],
+      "createdAt": "2026-09-18T08:19:32.056Z",
+      "updatedAt": "2026-09-18T08:19:32.056Z"
     }
   ]
 }
