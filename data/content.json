@@ -60,6 +60,32 @@
       "cover": "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/manga-covers/blue-lock/1789725186423-________raw___Blue_Lock_Raw__.jpg",
       "slug": "blue-lock",
       "updated_at": "2026-09-18T09:53:06.419Z"
+    },
+    {
+      "country": "JP",
+      "language": "ja",
+      "cover": "",
+      "status": "ongoing",
+      "author": "",
+      "artist": "",
+      "genres": [],
+      "id": "boruto-two-blue-vortex",
+      "slug": "boruto-two-blue-vortex",
+      "title": "Boruto: Two Blue Vortex",
+      "native_title": "ボルト raw ( Boruto raw ) -TWO BLUE VORTEX"
+    },
+    {
+      "country": "JP",
+      "language": "ja",
+      "cover": "",
+      "status": "ongoing",
+      "author": "",
+      "artist": "",
+      "genres": [],
+      "id": "adults-war",
+      "slug": "adults-war",
+      "title": "Adults War",
+      "native_title": "大人大戦 Raw"
     }
   ],
   "chapters": [
