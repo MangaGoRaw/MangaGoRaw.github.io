@@ -48,6 +48,14 @@ for item in BUILD.iterdir():
     if item.is_dir(): shutil.copytree(item,target,dirs_exist_ok=True)
     else: shutil.copy2(item,target)
 
+# Keep uploaded chapter image URLs on raw.githubusercontent.com. This avoids relying on
+# Pages artifact serving for hidden upload directories and still works with the static reader.
+chapter_reader = DIST / "chapter.html"
+if chapter_reader.exists():
+    t = chapter_reader.read_text(encoding="utf-8")
+    t = t.replace("if(x.startsWith(raw))return pagesBase+x.slice(raw.length);", "if(x.startsWith(raw))return x;")
+    chapter_reader.write_text(t, encoding="utf-8")
+
 for live_dir in ["chapter-images", "manga-covers"]:
     source = ROOT / live_dir
     target = DIST / live_dir
