@@ -276,9 +276,11 @@
       "title": "アニマルシグナル raw 第15話",
       "slug": "animal-signal-raw-15",
       "country": "JP",
-      "pages": [],
+      "pages": [
+        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/animal-signal/chapter-animal-signal-raw-15/.upload-1789807966766/0001-_877_2026_6_1_10_.jpg"
+      ],
       "createdAt": "2026-09-19T08:18:57.966Z",
-      "updatedAt": "2026-09-19T08:18:57.966Z"
+      "updatedAt": "2026-09-19T08:52:49.678Z"
     }
   ]
 }
