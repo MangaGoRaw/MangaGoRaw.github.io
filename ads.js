@@ -19,7 +19,7 @@ function slot(section,where){
   var wrap=document.createElement('div');wrap.className='mgraw-ad-slot';wrap.setAttribute('data-ad-id',section.id);
   wrap.setAttribute('data-ad-placement',where);
   wrap.style.cssText='display:flex;justify-content:center;align-items:center;width:100%;min-height:0;margin:18px auto;overflow:visible;clear:both;';
-  try{execCode(wrap,section.code)}catch(e){console.warn('MangaGoRaw ad failed',section.id,e)}
+  try{if(location.pathname==='/'||location.pathname==='/index.html'){var frame=document.createElement('iframe');frame.title='Advertisement';frame.setAttribute('aria-label','Advertisement');frame.setAttribute('scrolling','no');frame.style.cssText='display:block;border:0;width:100%;max-width:100%;height:280px;margin:0 auto;overflow:hidden;background:transparent;';frame.srcdoc='<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;padding:0;background:transparent;overflow:hidden}body{display:flex;justify-content:center;align-items:flex-start;min-height:90px}</style></head><body>'+String(section.code||'')+'</body></html>';wrap.appendChild(frame)}else execCode(wrap,section.code)}catch(e){console.warn('MangaGoRaw ad failed',section.id,e)}
   return wrap;
 }
 function mount(cfg){
