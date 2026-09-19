@@ -56,7 +56,16 @@ if chapter_reader.exists():
     t = t.replace("if(x.startsWith(raw))return pagesBase+x.slice(raw.length);", "if(x.startsWith(raw))return x;")
     chapter_reader.write_text(t, encoding="utf-8")
 
-# Load the static ads renderer on public pages. The renderer reads data/ads-config.json at runtime.\nfor public_name in ["index.html","latest-chapters.html","manga.html","chapter.html"]:\n    public_path=DIST/public_name\n    if public_path.exists():\n        page=public_path.read_text(encoding="utf-8")\n        if 'src="/ads.js"' not in page:\n            page=page.replace("</body>", '<script src="/ads.js?v=2"></script></body>', 1)\n            public_path.write_text(page, encoding="utf-8")\n\nfor live_dir in ["chapter-images", "manga-covers"]:
+# Load the static ads renderer on public pages. The renderer reads data/ads-config.json at runtime.
+for public_name in ["index.html","latest-chapters.html","manga.html","chapter.html"]:
+    public_path=DIST/public_name
+    if public_path.exists():
+        page=public_path.read_text(encoding="utf-8")
+        if 'src="/ads.js"' not in page:
+            page=page.replace("</body>", '<script src="/ads.js?v=2"></script></body>', 1)
+            public_path.write_text(page, encoding="utf-8")
+
+for live_dir in ["chapter-images", "manga-covers"]:
     source = ROOT / live_dir
     target = DIST / live_dir
     if source.exists(): shutil.copytree(source, target, dirs_exist_ok=True)
