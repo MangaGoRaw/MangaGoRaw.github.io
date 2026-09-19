@@ -64,7 +64,7 @@
     {
       "country": "JP",
       "language": "ja",
-      "cover": "",
+      "cover": "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/manga-covers/boruto-two-blue-vortex/1789806531646-9b8d0b5993c898aada1e856c00cc8397.webp",
       "status": "ongoing",
       "author": "",
       "artist": "",
@@ -72,7 +72,8 @@
       "id": "boruto-two-blue-vortex",
       "slug": "boruto-two-blue-vortex",
       "title": "Boruto: Two Blue Vortex",
-      "native_title": "ボルト raw ( Boruto raw ) -TWO BLUE VORTEX"
+      "native_title": "ボルト raw ( Boruto raw ) -TWO BLUE VORTEX",
+      "updated_at": "2026-09-19T08:28:51.633Z"
     },
     {
       "country": "JP",
