@@ -62,7 +62,7 @@ for public_name in ["index.html","latest-chapters.html","manga.html","chapter.ht
     if public_path.exists():
         page=public_path.read_text(encoding="utf-8")
         if 'src="/ads.js"' not in page:
-            page=page.replace("</body>", '<script src="/ads.js?v=2"></script></body>', 1)
+            page=page.replace("</body>", '<script src="/ads.js?v=3"></script></body>', 1)
             public_path.write_text(page, encoding="utf-8")
 
 for live_dir in ["chapter-images", "manga-covers"]:
