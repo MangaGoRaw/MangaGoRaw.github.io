@@ -250,9 +250,11 @@
       "title": "カノンマスター raw 第13話",
       "slug": "kanon-master-raw-13",
       "country": "JP",
-      "pages": [],
+      "pages": [
+        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/kanon-master/chapter-kanon-master-raw-13/.upload-1789807923454/0001-_877_2026_6_1_10_.jpg"
+      ],
       "createdAt": "2026-09-19T08:18:57.966Z",
-      "updatedAt": "2026-09-19T08:18:57.966Z"
+      "updatedAt": "2026-09-19T08:52:07.241Z"
     },
     {
       "id": "manual-haru-formula-14",
