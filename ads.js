@@ -1,6 +1,7 @@
 (function(){
 'use strict';
 var ROOT='/data/ads-config.json', mounted={};
+function log(){try{console.debug.apply(console,['[MangaGoRaw ads]'].concat([].slice.call(arguments)))}catch(e){}}
 function load(){return fetch(ROOT+'?v='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error();return r.json()}).catch(function(){return {sections:[]}})}
 function execCode(host,code){
   var tpl=document.createElement('template'); tpl.innerHTML=String(code||'');
@@ -23,7 +24,8 @@ function slot(section,where){
 }
 function mount(cfg){
   var sections=Array.isArray(cfg.sections)?cfg.sections.filter(function(s){return s&&s.enabled&&String(s.code||'').trim()}):[];
-  if(!sections.length)return;
+  if(!sections.length){log('no enabled sections');return;}
+  log('enabled sections',sections.length);
   var chapter=location.pathname.indexOf('/chapter.html')===0;
   sections.forEach(function(s){
     var p=String(s.placement||'start'),n=Math.max(1,Number(s.between)||1);
@@ -44,6 +46,7 @@ function mount(cfg){
   });
 }
 function boot(){
+ log('boot',location.pathname);
  load().then(function(cfg){
    var tries=0, timer=setInterval(function(){
      mount(cfg);tries++;
