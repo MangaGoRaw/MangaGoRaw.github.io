@@ -263,9 +263,11 @@
       "title": "ハルフォーミュラ raw 第14話",
       "slug": "haru-formula-raw-14",
       "country": "JP",
-      "pages": [],
+      "pages": [
+        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/chapter-images/haru-formula/chapter-haru-formula-raw-14/.upload-1789807941204/0001-_877_2026_6_1_10_.jpg"
+      ],
       "createdAt": "2026-09-19T08:18:57.966Z",
-      "updatedAt": "2026-09-19T08:18:57.966Z"
+      "updatedAt": "2026-09-19T08:52:25.715Z"
     },
     {
       "id": "manual-animal-signal-15",
