@@ -120,7 +120,7 @@ jobs:
               raise SystemExit('SEO verification failed: robots.txt sitemap declaration is missing')
           manual = json.loads((dist/'data/manual-chapters.json').read_text(encoding='utf-8'))
           expected = {str(c.get('slug')).strip() for c in manual.get('chapters',[]) if c.get('slug') and c.get('pages')}
-          found = set(re.findall(r'https://mangagoraw\\.github\\.io/chapter\\.html\\?slug=([^<]+)', sitemap))
+          found = set(re.findall(r'https://mangagoraw\.github\.io/chapter\.html\?slug=([^<]+)', sitemap))
           from urllib.parse import unquote
           found = {unquote(x) for x in found}
           missing = sorted(expected - found)
