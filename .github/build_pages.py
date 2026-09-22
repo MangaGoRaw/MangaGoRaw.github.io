@@ -56,7 +56,7 @@ if chapter_reader.exists():
     t = t.replace("if(x.startsWith(raw))return pagesBase+x.slice(raw.length);", "if(x.startsWith(raw))return x;")
     t = t.replace('<link id="canonical" rel="canonical" href="https://mangagoraw.github.io/chapter.html">', "")
     t = t.replace("document.getElementById('canonical').href=canonical;", "var canonicalEl=document.getElementById('canonical');if(!canonicalEl){canonicalEl=document.createElement('link');canonicalEl.id='canonical';canonicalEl.rel='canonical';document.head.appendChild(canonicalEl)}canonicalEl.href=canonical;")
-    t = t.replace("window.mangaAtlasAnalytics.pageView(", "window.mangaGoRawAnalytics.pageView(")
+    t = t.replace("window.mangaAtlasAnalytics.pageView(", "window.mangaGoRawAnalytics.pageView({page_title:document.title,page_location:location.href,")
     chapter_reader.write_text(t, encoding="utf-8")
 
 # Load the static ads renderer on public pages. The renderer reads data/ads-config.json at runtime.
