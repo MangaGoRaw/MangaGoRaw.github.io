@@ -17,7 +17,7 @@ function execCode(host,code){
 function slot(section,where){
   var key=section.id+'|'+where;if(mounted[key])return null;mounted[key]=1;
   var wrap=document.createElement('div');wrap.className='mgraw-ad-slot';wrap.setAttribute('data-ad-id',section.id);
-  wrap.setAttribute('data-ad-placement',where);
+  wrap.setAttribute('data-ad-placement',where);wrap.id='mgraw-ad-'+String(section.id).replace(/[^a-zA-Z0-9_-]/g,'-')+'-'+String(where).replace(/[^a-zA-Z0-9_-]/g,'-');
   wrap.style.cssText='display:flex;justify-content:center;align-items:center;width:100%;min-height:0;margin:18px auto;overflow:visible;clear:both;';
   try{execCode(wrap,section.code)}catch(e){console.warn('MangaGoRaw ad failed',section.id,e)}
   return wrap;
