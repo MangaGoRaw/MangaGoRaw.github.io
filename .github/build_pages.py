@@ -61,6 +61,11 @@ if chapter_reader.exists():
     chapter_reader.write_text(t, encoding="utf-8")
 
 # Load the static ads renderer on public pages. The renderer reads data/ads-config.json at runtime.
+# Use the repository's current ads renderer; the source ZIP may contain an older copy.
+ads_source=ROOT / "ads.js"
+ads_target=DIST / "ads.js"
+if ads_source.exists(): shutil.copy2(ads_source, ads_target)
+
 for public_name in ["index.html","latest-chapters.html","manga.html","chapter.html"]:
     public_path=DIST/public_name
     if public_path.exists():
