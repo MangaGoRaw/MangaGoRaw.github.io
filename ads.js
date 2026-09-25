@@ -19,7 +19,7 @@ function slot(section,where){
   var wrap=document.createElement('div');wrap.className='mgraw-ad-slot';wrap.setAttribute('data-ad-id',section.id);
   wrap.setAttribute('data-ad-placement',where);wrap.id='mgraw-ad-'+String(section.id).replace(/[^a-zA-Z0-9_-]/g,'-')+'-'+String(where).replace(/[^a-zA-Z0-9_-]/g,'-');
   wrap.style.cssText='display:flex;justify-content:center;align-items:center;width:100%;min-height:0;margin:18px auto;overflow:visible;clear:both;';
-  try{execCode(wrap,section.code)}catch(e){console.warn('MangaGoRaw ad failed',section.id,e)}
+  wrap.__mangagorawAdCode=String(section.code||'');
   return wrap;
 }
 function mount(cfg){
@@ -35,13 +35,13 @@ function mount(cfg){
     if(chapter&&p==='between'){
       var pages=document.querySelector('.pages'),imgs=pages&&pages.querySelectorAll('img.page');
       if(!imgs||imgs.length<n)return;
-      var el=slot(s,'between-'+n);if(el)imgs[n-1].insertAdjacentElement('afterend',el);
+      var el=slot(s,'between-'+n);if(el){imgs[n-1].insertAdjacentElement('afterend',el);try{execCode(el,el.__mangagorawAdCode)}catch(e){console.warn('MangaGoRaw ad failed',s.id,e)}}
     }else if(chapter&&(p==='start'||p==='end')){
       if(!reader)return;
-      var el=slot(s,p);if(el)(p==='start'?reader.insertBefore(el,reader.firstChild):reader.appendChild(el));
+      var el=slot(s,p);if(el){p==='start'?reader.insertBefore(el,reader.firstChild):reader.appendChild(el);try{execCode(el,el.__mangagorawAdCode)}catch(e){console.warn('MangaGoRaw ad failed',s.id,e)}}
     }else{
       var target=document.querySelector('main')||document.body,el=slot(s,p);
-      if(el)(p==='start'?target.insertBefore(el,target.firstChild):target.appendChild(el));
+      if(el){p==='start'?target.insertBefore(el,target.firstChild):target.appendChild(el);try{execCode(el,el.__mangagorawAdCode)}catch(e){console.warn('MangaGoRaw ad failed',s.id,e)}}
     }
   });
 }
