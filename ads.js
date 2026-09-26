@@ -21,18 +21,18 @@ function makeSlot(section,where){
   wrap.appendChild(frame);
   try{
     var code=String(section.code||'');
-    var doc=frame.contentDocument||frame.contentWindow.document;
-    doc.open();
-    doc.write('<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;padding:0;background:transparent;width:100%;overflow:hidden}body{display:flex;justify-content:center;align-items:flex-start}</style></head><body>'+code+'</body></html>');
-    doc.close();
+    var html='<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;padding:0;background:transparent;width:100%;overflow:hidden}body{display:flex;justify-content:center;align-items:flex-start}</style></head><body>'+code+'</body></html>';
     var resize=function(){
       try{
+        var doc=frame.contentDocument||frame.contentWindow.document;
         var h=Math.max(doc.body?doc.body.scrollHeight:0,doc.documentElement?doc.documentElement.scrollHeight:0,1);
         frame.style.height=Math.min(Math.max(h,1),1200)+'px';
       }catch(e){}
     };
     frame.addEventListener('load',function(){resize();setTimeout(resize,300);setTimeout(resize,1200);});
-    setTimeout(resize,500);
+    frame.srcdoc=html;
+    setTimeout(resize,700);
+    setTimeout(resize,1800);
   }catch(e){console.warn('[MangaGoRaw ads] render failed',section.id,e)}
   return wrap;
 }
