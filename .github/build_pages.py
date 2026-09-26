@@ -72,6 +72,8 @@ for public_name in ["index.html","latest-chapters.html","manga.html","chapter.ht
         page=re.sub(r'src="/ads\.js\?v=[^"]*"', 'src="/ads.js?v=11676e70"', page, flags=re.I)
         if 'src="/ads.js' not in page:
             page=page.replace("</body>", '<script src="/ads.js?v=11676e70"></script></body>', 1)
+        if 'src="/ads.js?v=11676e70"' not in page:
+            raise SystemExit(f"Ads cache-bust injection failed in {public_name}")
         public_path.write_text(page, encoding="utf-8")
 
 # Keep the GitHub-backed admin UI available on the Pages artifact.
