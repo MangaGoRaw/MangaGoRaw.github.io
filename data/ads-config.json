@@ -5,7 +5,7 @@
       "id": "ad-1",
       "name": "Ad Section 1",
       "enabled": true,
-      "code": "<script async=\"async\" data-cfasync=\"false\" src=\"https://pl31413346.profitableratecpmnetwork.com/a1e6c2c4fcfe4a831ed51e7928b91936/invoke.js\"></script>\n<div id=\"container-a1e6c2c4fcfe4a831ed51e7928b91936\"></div>",
+      "code": "<script async=\"async\" data-cfasync=\"false\" src=\"https://pl31413346.profitableratecpmnetwork.com/a1e6c2c4fcfe4a831ed51e7928b91936/invoke.js\"></script>\n<div id=\"container-a1e6c2c4fcfe4a831ed51e7928b91936\"></div>\n<script async=\"async\" data-cfasync=\"false\" src=\"https://agilelookout.com/b0aade7037e8bbc34852d9c860317b3d/invoke.js\"></script>\n<div id=\"container-b0aade7037e8bbc34852d9c860317b3d\"></div>",
       "placement": "start",
       "between": "50"
     },
@@ -13,7 +13,7 @@
       "id": "ad-2",
       "name": "Ad Section 2",
       "enabled": true,
-      "code": "<script async=\"async\" data-cfasync=\"false\" src=\"https://pl31413346.profitableratecpmnetwork.com/a1e6c2c4fcfe4a831ed51e7928b91936/invoke.js\"></script>\n<div id=\"container-a1e6c2c4fcfe4a831ed51e7928b91936\"></div>",
+      "code": "<script async=\"async\" data-cfasync=\"false\" src=\"https://pl31413346.profitableratecpmnetwork.com/a1e6c2c4fcfe4a831ed51e7928b91936/invoke.js\"></script>\n<div id=\"container-a1e6c2c4fcfe4a831ed51e7928b91936\"></div>\n<script async=\"async\" data-cfasync=\"false\" src=\"https://agilelookout.com/b0aade7037e8bbc34852d9c860317b3d/invoke.js\"></script>\n<div id=\"container-b0aade7037e8bbc34852d9c860317b3d\"></div>",
       "placement": "end",
       "between": "50"
     },
@@ -21,7 +21,7 @@
       "id": "ad-3",
       "name": "Ad Section 3",
       "enabled": true,
-      "code": "<script>\n  atOptions = {\n    'key' : '7304e34a389561f0dc18bb08137c0716',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://www.highrevenueformat.com/7304e34a389561f0dc18bb08137c0716/invoke.js\"></script>",
+      "code": "<script>\n  atOptions = {\n    'key' : '7304e34a389561f0dc18bb08137c0716',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://www.highrevenueformat.com/7304e34a389561f0dc18bb08137c0716/invoke.js\"></script>\n<script>\n  atOptions = {\n    'key' : '16a5ea2b615e678027a10458f305d3e8',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/16a5ea2b615e678027a10458f305d3e8/invoke.js\"></script>",
       "placement": "start",
       "between": "50"
     },
@@ -29,15 +29,15 @@
       "id": "ad-4",
       "name": "Ad Section 4",
       "enabled": true,
-      "code": "<script>\n  atOptions = {\n    'key' : '7304e34a389561f0dc18bb08137c0716',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://www.highrevenueformat.com/7304e34a389561f0dc18bb08137c0716/invoke.js\"></script>",
+      "code": "<script>\n  atOptions = {\n    'key' : '7304e34a389561f0dc18bb08137c0716',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://www.highrevenueformat.com/7304e34a389561f0dc18bb08137c0716/invoke.js\"></script>\n<script>\n  atOptions = {\n    'key' : '16a5ea2b615e678027a10458f305d3e8',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/16a5ea2b615e678027a10458f305d3e8/invoke.js\"></script>",
       "placement": "between",
-      "between": "2"
+      "between": "5"
     },
     {
       "id": "ad-5",
       "name": "Ad Section 5",
       "enabled": true,
-      "code": "<script>\n  atOptions = {\n    'key' : '7304e34a389561f0dc18bb08137c0716',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://www.highrevenueformat.com/7304e34a389561f0dc18bb08137c0716/invoke.js\"></script>",
+      "code": "<script>\n  atOptions = {\n    'key' : '7304e34a389561f0dc18bb08137c0716',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://www.highrevenueformat.com/7304e34a389561f0dc18bb08137c0716/invoke.js\"></script>\n<script>\n  atOptions = {\n    'key' : '16a5ea2b615e678027a10458f305d3e8',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/16a5ea2b615e678027a10458f305d3e8/invoke.js\"></script>",
       "placement": "end",
       "between": "8"
     },
@@ -45,7 +45,7 @@
       "id": "ad-6",
       "name": "Ad Section 6",
       "enabled": true,
-      "code": "<script>\n  atOptions = {\n    'key' : '1e74ca09a591bd8988a6f04fa8c9689a',\n    'format' : 'iframe',\n    'height' : 250,\n    'width' : 300,\n    'params' : {}\n  };\n</script>\n<script src=\"https://www.highrevenueformat.com/1e74ca09a591bd8988a6f04fa8c9689a/invoke.js\"></script>",
+      "code": "<script>\n  atOptions = {\n    'key' : '1e74ca09a591bd8988a6f04fa8c9689a',\n    'format' : 'iframe',\n    'height' : 250,\n    'width' : 300,\n    'params' : {}\n  };\n</script>\n<script src=\"https://www.highrevenueformat.com/1e74ca09a591bd8988a6f04fa8c9689a/invoke.js\"></script>\n",
       "placement": "end",
       "between": "12"
     },
@@ -61,17 +61,17 @@
       "id": "ad-8",
       "name": "Ad Section 8",
       "enabled": false,
-      "code": "",
+      "code": "<script>\n  atOptions = {\n    'key' : '16a5ea2b615e678027a10458f305d3e8',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/16a5ea2b615e678027a10458f305d3e8/invoke.js\"></script>\n<script async=\"async\" data-cfasync=\"false\" src=\"https://agilelookout.com/b0aade7037e8bbc34852d9c860317b3d/invoke.js\"></script>\n<div id=\"container-b0aade7037e8bbc34852d9c860317b3d\"></div>",
       "placement": "between",
-      "between": "16"
+      "between": "9"
     },
     {
       "id": "ad-9",
       "name": "Ad Section 9",
       "enabled": false,
-      "code": "",
+      "code": "<script>\n  atOptions = {\n    'key' : '16a5ea2b615e678027a10458f305d3e8',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/16a5ea2b615e678027a10458f305d3e8/invoke.js\"></script>\n<script async=\"async\" data-cfasync=\"false\" src=\"https://agilelookout.com/b0aade7037e8bbc34852d9c860317b3d/invoke.js\"></script>\n<div id=\"container-b0aade7037e8bbc34852d9c860317b3d\"></div>",
       "placement": "between",
-      "between": "18"
+      "between": "12"
     }
   ]
 }
