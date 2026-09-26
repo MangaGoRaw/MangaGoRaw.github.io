@@ -10,12 +10,22 @@ function execCode(host,code){
     if(n.nodeType===1&&n.tagName.toLowerCase()==='script')scripts.push(n);
     else host.appendChild(n.cloneNode(true));
   });
-  scripts.forEach(function(n){
-    var s=document.createElement('script');
-    for(var i=0;i<n.attributes.length;i++)s.setAttribute(n.attributes[i].name,n.attributes[i].value);
-    if(n.src)s.src=n.src;else s.text=n.textContent||'';
-    host.appendChild(s);
-  });
+  function run(i){
+    if(i>=scripts.length)return;
+    var n=scripts[i],s=document.createElement('script');
+    for(var j=0;j<n.attributes.length;j++)s.setAttribute(n.attributes[j].name,n.attributes[j].value);
+    if(n.src){
+      s.onload=function(){run(i+1)};
+      s.onerror=function(){console.warn('MangaGoRaw ad script failed',n.src);run(i+1)};
+      s.src=n.src;
+      host.appendChild(s);
+    }else{
+      s.text=n.textContent||'';
+      host.appendChild(s);
+      run(i+1);
+    }
+  }
+  run(0);
 }
 function slot(section,where){
   var key=section.id+'|'+where;if(mounted[key])return null;mounted[key]=1;
