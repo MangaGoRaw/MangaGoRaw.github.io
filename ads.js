@@ -3,7 +3,7 @@
 if(window.__MGR_ADS_BOOTED)return;
 window.__MGR_ADS_BOOTED=true;
 
-var ROOT='/data/ads-config.json',mounted={},executed={};
+var ROOT='/data/ads-config.json',mounted={};
 
 function log(){
   try{console.debug.apply(console,['[MangaGoRaw ads]'].concat([].slice.call(arguments)))}catch(e){}
@@ -100,16 +100,6 @@ function runScripts(host,code){
 function render(section,where,parent){
   var code=String(section.code||'').trim();
   if(!code)return;
-
-  /*
-   * The same provider code/slot must not be injected multiple times on one
-   * page. Several configured sections intentionally contain the same code
-   * and container IDs; executing them twice creates duplicate IDs and causes
-   * the provider to target the wrong/first container.
-   */
-  var codeKey=code;
-  if(executed[codeKey]){log('duplicate ad code skipped',section.id);return;}
-  executed[codeKey]=1;
 
   var el=slot(section,where);
   if(!el)return;
