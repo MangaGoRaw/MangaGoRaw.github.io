@@ -35,7 +35,38 @@ for path in BUILD.rglob("*"):
     except UnicodeDecodeError: continue
     for a,b in [("https://mangaatlas.github.io","https://mangagoraw.github.io"),("MangaAtlas.github.io","MangaGoRaw.github.io"),("MangaAtlas","MangaGoRaw"),("mangaatlas","mangagoraw"),("MANGAATLAS","MANGAGORAW"),("manga-atlas.vercel.app","mangagoraw.github.io"),("</span>Atlas","</span>GoRaw"),("MangaGoRaw/mangagoraw.github.io","MangaGoRaw/MangaGoRaw.github.io")]: text=text.replace(a,b)
     if path.name == "analytics.js":
-        text="(function(){'use strict';var ID='G-HC32QHLNXB';if(window.__mangaGoRawGA)return;window.__mangaGoRawGA=true;window.dataLayer=window.dataLayer||[];window.gtag=window.gtag||function(){window.dataLayer.push(arguments)};window.gtag('js',new Date());var isChapter=/\\/chapter(?:\\.html)?\\/?$/i.test(location.pathname);window.gtag('config',ID,{send_page_view:!isChapter});var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(ID);document.head.appendChild(s);window.mangaGoRawAnalytics={pageView:function(p){p=p||{};if(isChapter){var title=p.page_title||document.title;var loc=p.page_location||location.href;var manga=String(p.manga_title||'').trim();var number=String(p.chapter_number==null?'':p.chapter_number).trim();var slug=String(p.chapter_slug||'').trim();var key=String(p.chapter_key||((manga&&number)?manga+' #'+number:slug)).trim();window.gtag('event','page_view',{page_title:title,page_location:loc,content_group:manga||'Manga Chapter'});window.gtag('event','chapter_view',{chapter_key:key,chapter_slug:slug,chapter_number:number,manga_id:String(p.manga_id||'').trim(),manga_title:manga,content_type:'manga_chapter',page_title:title,page_location:loc})}else{window.gtag('event','chapter_view',p)}},event:function(n,p){window.gtag('event',n,p||{})}}})();\\n"
+        text="""(function(){
+'use strict';
+var GA_ID='G-HC32QHLNXB';
+window.dataLayer=window.dataLayer||[];
+window.gtag=window.gtag||function(){window.dataLayer.push(arguments);};
+window.gtag('js',new Date());
+window.gtag('config',GA_ID);
+var script=document.createElement('script');
+script.async=true;
+script.src='https://www.googletagmanager.com/gtag/js?id='+GA_ID;
+document.head.appendChild(script);
+window.mangaGoRawAnalytics={
+  pageView:function(data){
+    data=data||{};
+    window.gtag('event','page_view',{
+      page_title:data.page_title||document.title,
+      page_location:data.page_location||location.href,
+      page_referrer:data.page_referrer||document.referrer
+    });
+    if(data.chapter_number!=null){
+      window.gtag('event','chapter_view',{
+        chapter_number:String(data.chapter_number),
+        chapter_slug:String(data.chapter_slug||''),
+        manga_id:String(data.manga_id||''),
+        manga_title:String(data.manga_title||''),
+        content_type:'manga_chapter'
+      });
+    }
+  },
+  event:function(name,data){window.gtag('event',name,data||{});}
+};
+})();\\n"
     if path.name == "chapter-enhancements.js":
         start=text.find("function count(){"); end=text.find("function boot()",start)
         if start>=0 and end>start: text=text[:start]+"function count(){}\n"+text[end:]
