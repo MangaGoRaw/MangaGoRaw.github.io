@@ -162,6 +162,14 @@ if index.exists() and chapters:
 
 # Final public-page safeguards: keep Google Analytics and current ads renderer after all page rewrites.
 GA_SCRIPT='<script async src="https://www.googletagmanager.com/gtag/js?id=G-HC32QHLNXB"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-HC32QHLNXB");</script>'
+# Ensure chapter analytics uses an explicit page_view after dynamic chapter metadata is known.
+_chapter_analytics = DIST / "chapter.html"
+if _chapter_analytics.exists():
+    _ct = _chapter_analytics.read_text(encoding="utf-8")
+    _ct = _ct.replace("gtag('js',new Date());gtag('config','G-HC32QHLNXB');", "gtag('js',new Date());gtag('config','G-HC32QHLNXB',{send_page_view:false});")
+    _ct = _ct.replace("if(window.mangaGoRawAnalytics)window.mangaGoRawAnalytics.pageView({chapter_key:", "if(window.gtag)window.gtag('event','page_view',{page_title:document.title,page_location:location.href});if(window.mangaGoRawAnalytics)window.mangaGoRawAnalytics.pageView({chapter_key:")
+    _chapter_analytics.write_text(_ct,encoding="utf-8")
+
 for _public_name in ["index.html","latest-chapters.html","manga.html","chapter.html"]:
     _public_path=DIST/_public_name
     if not _public_path.exists(): continue
