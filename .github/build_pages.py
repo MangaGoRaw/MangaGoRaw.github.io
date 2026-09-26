@@ -74,10 +74,17 @@ for public_name in ["index.html","latest-chapters.html","manga.html","chapter.ht
             page=page.replace("</body>", '<script src="/ads.js?v=4"></script></body>', 1)
             public_path.write_text(page, encoding="utf-8")
 
-# Keep the GitHub-backed admin UI available on the Pages artifact.\nadmin_source=ROOT / "admin"\nadmin_target=DIST / "admin"\nif admin_source.exists(): shutil.copytree(admin_source, admin_target, dirs_exist_ok=True)\n\nfor live_dir in ["chapter-images", "manga-covers"]:
+# Keep the GitHub-backed admin UI available on the Pages artifact.
+admin_source=ROOT / "admin"
+admin_target=DIST / "admin"
+if admin_source.exists():
+    shutil.copytree(admin_source, admin_target, dirs_exist_ok=True)
+
+for live_dir in ["chapter-images", "manga-covers"]:
     source = ROOT / live_dir
     target = DIST / live_dir
     if source.exists(): shutil.copytree(source, target, dirs_exist_ok=True)
+
 
 for name in ["data/content.json","data/manual-chapters.json","data/extra-chapters.json","data/upcoming-chapters.json","data/ads-config.json"]:
     source=ROOT/name
