@@ -71,10 +71,10 @@ for public_name in ["index.html","latest-chapters.html","manga.html","chapter.ht
     if public_path.exists():
         page=public_path.read_text(encoding="utf-8")
         if 'src="/ads.js"' not in page:
-            page=page.replace("</body>", '<script src="/ads.js?v=3"></script></body>', 1)
+            page=page.replace("</body>", '<script src="/ads.js?v=4"></script></body>', 1)
             public_path.write_text(page, encoding="utf-8")
 
-for live_dir in ["chapter-images", "manga-covers"]:
+# Keep the GitHub-backed admin UI available on the Pages artifact.\nadmin_source=ROOT / "admin"\nadmin_target=DIST / "admin"\nif admin_source.exists(): shutil.copytree(admin_source, admin_target, dirs_exist_ok=True)\n\nfor live_dir in ["chapter-images", "manga-covers"]:
     source = ROOT / live_dir
     target = DIST / live_dir
     if source.exists(): shutil.copytree(source, target, dirs_exist_ok=True)
