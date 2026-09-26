@@ -131,6 +131,32 @@ jobs:
           print(f'SEO verified: {len(found)} chapter URL(s) represented in sitemap; robots.txt points to sitemap.xml.')
           PY
 
+      - name: Verify analytics and ads wiring
+        run: |
+          python3 - <<'PY'
+          import json
+          import re
+          from pathlib import Path
+          dist=Path('dist')
+          cfg=json.loads((dist/'data/ads-config.json').read_text(encoding='utf-8'))
+          enabled=[s for s in cfg.get('sections',[]) if s.get('enabled') and str(s.get('code') or '').strip()]
+          if not enabled:
+              raise SystemExit('Ads verification failed: no enabled ad sections in data/ads-config.json')
+          ads=(dist/'ads.js').read_text(encoding='utf-8')
+          if 'function execCode' not in ads or 'var scripts=[]' not in ads:
+              raise SystemExit('Ads verification failed: current ads renderer is missing ordered script execution')
+          pages=['index.html','latest-chapters.html','manga.html','chapter.html']
+          for name in pages:
+              p=dist/name
+              if not p.exists(): continue
+              text=p.read_text(encoding='utf-8')
+              ga=len(re.findall(r'<script[^>]+src=["\']/analytics\\.js(?:\\?[^"\']*)?["\'][^>]*></script>',text,re.I))
+              ad=len(re.findall(r'<script[^>]+src=["\']/ads\\.js(?:\\?[^"\']*)?["\'][^>]*></script>',text,re.I))
+              if ga != 1: raise SystemExit(f'Analytics verification failed in {name}: expected 1 analytics.js tag, found {ga}')
+              if ad != 1: raise SystemExit(f'Ads verification failed in {name}: expected 1 ads.js tag, found {ad}')
+          print(f'Analytics/ads verified: {len(enabled)} enabled ad sections and one renderer tag on each public page.')
+          PY
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
