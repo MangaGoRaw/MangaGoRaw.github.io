@@ -68,7 +68,7 @@
     {
       "id": "ad-9",
       "name": "Ad Section 9",
-      "enabled": false,
+      "enabled": true,
       "code": "<script>\n  atOptions = {\n    'key' : '16a5ea2b615e678027a10458f305d3e8',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/16a5ea2b615e678027a10458f305d3e8/invoke.js\"></script>\n<script>\n  atOptions = {\n    'key' : '6736f762925b63de22999e015376ca80',\n    'format' : 'iframe',\n    'height' : 250,\n    'width' : 300,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/6736f762925b63de22999e015376ca80/invoke.js\"></script>",
       "placement": "end",
       "between": "5"
