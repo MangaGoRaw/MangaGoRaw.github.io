@@ -4,28 +4,21 @@ var ROOT='/data/ads-config.json', mounted={};
 function log(){try{console.debug.apply(console,['[MangaGoRaw ads]'].concat([].slice.call(arguments)))}catch(e){}}
 function load(){return fetch(ROOT+'?v='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error();return r.json()}).catch(function(){return {sections:[]}})}
 function execCode(host,code){
-  var tpl=document.createElement('template'); tpl.innerHTML=String(code||'');
-  var scripts=[];
-  Array.prototype.slice.call(tpl.content.childNodes).forEach(function(n){
-    if(n.nodeType===1&&n.tagName.toLowerCase()==='script')scripts.push(n);
-    else host.appendChild(n.cloneNode(true));
-  });
-  function run(i){
-    if(i>=scripts.length)return;
-    var n=scripts[i],s=document.createElement('script');
-    for(var j=0;j<n.attributes.length;j++)s.setAttribute(n.attributes[j].name,n.attributes[j].value);
-    if(n.src){
-      s.onload=function(){run(i+1)};
-      s.onerror=function(){console.warn('MangaGoRaw ad script failed',n.src);run(i+1)};
-      s.src=n.src;
-      host.appendChild(s);
-    }else{
-      s.text=n.textContent||'';
-      host.appendChild(s);
-      run(i+1);
-    }
-  }
-  run(0);
+  var html=String(code||'');
+  /* Each ad gets an isolated document. Several existing provider snippets reuse
+     the same container IDs and globals; isolation prevents one slot from
+     stealing/overwriting another slot. */
+  var frame=document.createElement('iframe');
+  frame.title='Advertisement';
+  frame.setAttribute('aria-label','Advertisement');
+  frame.setAttribute('scrolling','no');
+  frame.style.cssText='display:block;width:100%;max-width:100%;height:280px;border:0;margin:0 auto;overflow:hidden;background:transparent;';
+  host.appendChild(frame);
+  var doc=frame.contentDocument||frame.contentWindow.document;
+  doc.open();
+  doc.write('<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;padding:0;background:transparent;min-height:1px;text-align:center;overflow:hidden}body>*{max-width:100%;}</style></head><body>'+html+'</body></html>');
+  doc.close();
+  return frame;
 }
 function slot(section,where){
   var key=section.id+'|'+where;if(mounted[key])return null;mounted[key]=1;
