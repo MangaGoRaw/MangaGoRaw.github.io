@@ -37,38 +37,55 @@ function runScripts(host,code){
   var tpl=document.createElement('template');
   tpl.innerHTML=String(code||'');
   var nodes=Array.prototype.slice.call(tpl.content.childNodes);
+  var scripts=[];
 
   /*
-   * Preserve the ad provider's original HTML order.
-   * External ad scripts are inserted as real <script> elements, but we do
-   * not wait for their load event before inserting the following container.
-   * This lets a provider see the same script/container relationship as the
-   * original snippet while still executing scripts that came from config.
+   * First put every non-script node into the live DOM. This is important for
+   * container-based providers: when invoke.js runs, its target container must
+   * already exist.
    */
   nodes.forEach(function(n){
-    if(n.nodeType!==1 || n.tagName.toLowerCase()!=='script'){
-      host.appendChild(n.cloneNode(true));
-      return;
-    }
-
-    var s=document.createElement('script');
-    for(var i=0;i<n.attributes.length;i++){
-      s.setAttribute(n.attributes[i].name,n.attributes[i].value);
-    }
-
-    if(n.src){
-      s.async=false;
-      s.onload=function(){log('provider loaded',n.src)};
-      s.onerror=function(){
-        console.warn('[MangaGoRaw ads] provider script failed',n.src);
-      };
-      host.appendChild(s);
+    if(n.nodeType===1 && n.tagName.toLowerCase()==='script'){
+      scripts.push(n);
     }else{
-      s.text=n.textContent||'';
-      host.appendChild(s);
+      host.appendChild(n.cloneNode(true));
     }
   });
-  return Promise.resolve();
+
+  /*
+   * Execute provider snippets strictly in source order. In particular,
+   * atOptions-based providers require the inline atOptions assignment to stay
+   * paired with the external invoke.js that immediately follows it.
+   */
+  function next(i){
+    if(i>=scripts.length)return Promise.resolve();
+    var n=scripts[i];
+    var s=document.createElement('script');
+    for(var j=0;j<n.attributes.length;j++){
+      s.setAttribute(n.attributes[j].name,n.attributes[j].value);
+    }
+
+    return new Promise(function(resolve){
+      if(n.src){
+        s.async=false;
+        s.onload=function(){
+          log('provider loaded',n.src);
+          resolve();
+        };
+        s.onerror=function(){
+          console.warn('[MangaGoRaw ads] provider script failed',n.src);
+          resolve();
+        };
+        host.appendChild(s);
+      }else{
+        s.text=n.textContent||'';
+        host.appendChild(s);
+        resolve();
+      }
+    }).then(function(){return next(i+1)});
+  }
+
+  return next(0);
 }
 
 function render(section,where,parent){
