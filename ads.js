@@ -30,9 +30,14 @@ function makeSlot(section,where){
       }catch(e){}
     };
     frame.addEventListener('load',function(){resize();setTimeout(resize,300);setTimeout(resize,1200);});
-    frame.srcdoc=html;
-    setTimeout(resize,700);
-    setTimeout(resize,1800);
+    frame.setAttribute('data-ad-html',html);
+    frame._mgrawActivate=function(){
+      try{
+        frame.srcdoc=frame.getAttribute('data-ad-html')||html;
+        setTimeout(resize,700);
+        setTimeout(resize,1800);
+      }catch(e){console.warn('[MangaGoRaw ads] activation failed',section.id,e)}
+    };
   }catch(e){console.warn('[MangaGoRaw ads] render failed',section.id,e)}
   return wrap;
 }
@@ -48,17 +53,17 @@ function mount(cfg){
       var pages=document.querySelector('.pages'),imgs=pages&&pages.querySelectorAll('img.page');
       if(!imgs||imgs.length<n)return;
       el=makeSlot(s,'between-'+n);
-      if(el)imgs[n-1].insertAdjacentElement('afterend',el);
+      if(el){imgs[n-1].insertAdjacentElement('afterend',el);var fr=el.querySelector('.mgraw-ad-frame');if(fr&&fr._mgrawActivate)fr._mgrawActivate();}
       return;
     }
     if(chapter&&(p==='start'||p==='end')){
-      el=makeSlot(s,p);if(el)(p==='start'?reader.insertBefore(el,reader.firstChild):reader.appendChild(el));
+      el=makeSlot(s,p);if(el){p==='start'?reader.insertBefore(el,reader.firstChild):reader.appendChild(el);var fr=el.querySelector('.mgraw-ad-frame');if(fr&&fr._mgrawActivate)fr._mgrawActivate();}
       return;
     }
     if(!chapter&&(p==='between'))return;
     var target=document.querySelector('main')||document.body;
     el=makeSlot(s,p);
-    if(el)(p==='start'?target.insertBefore(el,target.firstChild):target.appendChild(el));
+    if(el){p==='start'?target.insertBefore(el,target.firstChild):target.appendChild(el);var fr=el.querySelector('.mgraw-ad-frame');if(fr&&fr._mgrawActivate)fr._mgrawActivate();}
   });
 }
 function boot(){
