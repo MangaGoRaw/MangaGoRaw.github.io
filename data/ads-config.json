@@ -60,7 +60,7 @@
     {
       "id": "ad-8",
       "name": "Ad Section 8",
-      "enabled": true,
+      "enabled": false,
       "code": "<script>\n  atOptions = {\n    'key' : '16a5ea2b615e678027a10458f305d3e8',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/16a5ea2b615e678027a10458f305d3e8/invoke.js\"></script>\n<script async=\"async\" data-cfasync=\"false\" src=\"https://agilelookout.com/b0aade7037e8bbc34852d9c860317b3d/invoke.js\"></script>\n<div id=\"container-b0aade7037e8bbc34852d9c860317b3d\"></div>",
       "placement": "between",
       "between": "9"
@@ -68,7 +68,7 @@
     {
       "id": "ad-9",
       "name": "Ad Section 9",
-      "enabled": true,
+      "enabled": false,
       "code": "<script>\n  atOptions = {\n    'key' : '16a5ea2b615e678027a10458f305d3e8',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/16a5ea2b615e678027a10458f305d3e8/invoke.js\"></script>\n<script async=\"async\" data-cfasync=\"false\" src=\"https://agilelookout.com/b0aade7037e8bbc34852d9c860317b3d/invoke.js\"></script>\n<div id=\"container-b0aade7037e8bbc34852d9c860317b3d\"></div>",
       "placement": "between",
       "between": "12"
