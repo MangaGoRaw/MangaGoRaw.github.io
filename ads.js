@@ -37,41 +37,38 @@ function runScripts(host,code){
   var tpl=document.createElement('template');
   tpl.innerHTML=String(code||'');
   var nodes=Array.prototype.slice.call(tpl.content.childNodes);
-  var scripts=[];
 
+  /*
+   * Preserve the ad provider's original HTML order.
+   * External ad scripts are inserted as real <script> elements, but we do
+   * not wait for their load event before inserting the following container.
+   * This lets a provider see the same script/container relationship as the
+   * original snippet while still executing scripts that came from config.
+   */
   nodes.forEach(function(n){
-    if(n.nodeType===1 && n.tagName.toLowerCase()==='script'){
-      scripts.push(n);
-    }else{
+    if(n.nodeType!==1 || n.tagName.toLowerCase()!=='script'){
       host.appendChild(n.cloneNode(true));
+      return;
+    }
+
+    var s=document.createElement('script');
+    for(var i=0;i<n.attributes.length;i++){
+      s.setAttribute(n.attributes[i].name,n.attributes[i].value);
+    }
+
+    if(n.src){
+      s.async=false;
+      s.onload=function(){log('provider loaded',n.src)};
+      s.onerror=function(){
+        console.warn('[MangaGoRaw ads] provider script failed',n.src);
+      };
+      host.appendChild(s);
+    }else{
+      s.text=n.textContent||'';
+      host.appendChild(s);
     }
   });
-
-  var chain=Promise.resolve();
-  scripts.forEach(function(n){
-    chain=chain.then(function(){
-      return new Promise(function(resolve){
-        var s=document.createElement('script');
-        for(var i=0;i<n.attributes.length;i++){
-          s.setAttribute(n.attributes[i].name,n.attributes[i].value);
-        }
-        if(n.src){
-          s.async=false;
-          s.onload=function(){resolve()};
-          s.onerror=function(){
-            console.warn('[MangaGoRaw ads] provider script failed',n.src);
-            resolve();
-          };
-          host.appendChild(s);
-        }else{
-          s.text=n.textContent||'';
-          host.appendChild(s);
-          resolve();
-        }
-      });
-    });
-  });
-  return chain;
+  return Promise.resolve();
 }
 
 function render(section,where,parent){
