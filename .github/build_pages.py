@@ -54,6 +54,7 @@ chapter_reader = DIST / "chapter.html"
 if chapter_reader.exists():
     t = chapter_reader.read_text(encoding="utf-8")
     t = t.replace("if(x.startsWith(raw))return pagesBase+x.slice(raw.length);", "if(x.startsWith(raw))return x;")
+    t = t.replace("if(!/^https?:\\/\\//i.test(x))return pagesBase+x.replace(/^\\//,'');", "if(!/^https?:\\/\\//i.test(x))return raw+x.replace(/^\\//,'');")
     t = t.replace('<link id="canonical" rel="canonical" href="https://mangagoraw.github.io/chapter.html">', "")
     t = t.replace("document.getElementById('canonical').href=canonical;", "var canonicalEl=document.getElementById('canonical');if(!canonicalEl){canonicalEl=document.createElement('link');canonicalEl.id='canonical';canonicalEl.rel='canonical';document.head.appendChild(canonicalEl)}canonicalEl.href=canonical;")
     t = t.replace("window.mangaAtlasAnalytics.pageView(", "window.mangaGoRawAnalytics.pageView(")
