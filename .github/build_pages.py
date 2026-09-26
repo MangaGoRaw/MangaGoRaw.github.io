@@ -168,7 +168,7 @@ _chapter_analytics = DIST / "chapter.html"
 if _chapter_analytics.exists():
     _ct = _chapter_analytics.read_text(encoding="utf-8")
     _ct = _ct.replace("gtag('js',new Date());gtag('config','G-HC32QHLNXB');", "gtag('js',new Date());gtag('config','G-HC32QHLNXB',{send_page_view:false});")
-    _ct = _ct.replace("if(window.mangaGoRawAnalytics)window.mangaGoRawAnalytics.pageView({chapter_key:", "if(window.gtag)window.gtag('event','page_view',{page_title:document.title,page_location:location.href});if(window.mangaGoRawAnalytics)window.mangaGoRawAnalytics.pageView({chapter_key:")
+    _ct = _ct.replace("if(window.mangaGoRawAnalytics)window.mangaGoRawAnalytics.pageView({chapter_key:", "if(window.mangaGoRawAnalytics)window.mangaGoRawAnalytics.pageView({chapter_key:")
     _chapter_analytics.write_text(_ct,encoding="utf-8")
 
 for _public_name in ["index.html","latest-chapters.html","manga.html","chapter.html"]:
