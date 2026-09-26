@@ -96,6 +96,21 @@ for name in ["data/content.json","data/manual-chapters.json","data/extra-chapter
     if source.exists():
         target=DIST/name; target.parent.mkdir(parents=True,exist_ok=True); shutil.copy2(source,target)
 
+# Generate isolated ad documents so providers that depend on document.write/currentScript work normally.
+ads_cfg_path=DIST/"data/ads-config.json"
+ads_dir=DIST/"ads"
+if ads_dir.exists(): shutil.rmtree(ads_dir)
+ads_dir.mkdir(parents=True,exist_ok=True)
+if ads_cfg_path.exists():
+    ads_cfg=json.loads(ads_cfg_path.read_text(encoding="utf-8"))
+    for _section in ads_cfg.get("sections",[]):
+        if not _section.get("enabled") or not str(_section.get("code") or "").strip(): continue
+        _sid=str(_section.get("id") or "").strip()
+        if not _sid: continue
+        _code=str(_section.get("code") or "")
+        _doc='<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;padding:0;background:transparent;overflow:hidden;width:100%;min-height:100px}body{display:flex;justify-content:center;align-items:flex-start}</style></head><body>'+_code+'</body></html>'
+        (ads_dir/(_sid+'.html')).write_text(_doc,encoding="utf-8")
+
 content=json.loads((DIST/"data/content.json").read_text(encoding="utf-8"))
 manual=json.loads((DIST/"data/manual-chapters.json").read_text(encoding="utf-8"))
 mangas=content.get("mangas",[])
