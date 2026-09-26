@@ -1,6 +1,6 @@
 from pathlib import Path
 from zipfile import ZipFile
-import shutil, json, html, re
+import shutil, json, html, re, hashlib
 from urllib.parse import quote
 from xml.sax.saxutils import escape
 
@@ -64,6 +64,9 @@ if chapter_reader.exists():
 ads_source=ROOT / "ads.js"
 ads_target=DIST / "ads.js"
 if ads_source.exists(): shutil.copy2(ads_source, ads_target)
+ads_version = hashlib.sha256(ads_target.read_bytes()).hexdigest()[:12] if ads_target.exists() else 'missing'
+
+GA_TAG='<script async src="https://www.googletagmanager.com/gtag/js?id=G-HC32QHLNXB"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag(\'js\',new Date());gtag(\'config\',\'G-HC32QHLNXB\');</script>'
 
 for public_name in ["index.html","latest-chapters.html","manga.html","chapter.html"]:
     public_path=DIST/public_name
