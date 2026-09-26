@@ -70,9 +70,10 @@ for public_name in ["index.html","latest-chapters.html","manga.html","chapter.ht
     public_path=DIST/public_name
     if public_path.exists():
         page=public_path.read_text(encoding="utf-8")
-        if 'src="/ads.js"' not in page:
-            page=page.replace("</body>", '<script src="/ads.js?v=4"></script></body>', 1)
-            public_path.write_text(page, encoding="utf-8")
+        page=page.replace('src="/ads.js?v=4"','src="/ads.js?v=5"')
+        if 'src="/ads.js' not in page:
+            page=page.replace("</body>", '<script src="/ads.js?v=5"></script></body>', 1)
+        public_path.write_text(page, encoding="utf-8")
 
 # Keep the GitHub-backed admin UI available on the Pages artifact.
 admin_source=ROOT / "admin"
