@@ -143,7 +143,7 @@ jobs:
           if not enabled:
               raise SystemExit('Ads verification failed: no enabled ad sections in data/ads-config.json')
           ads=(dist/'ads.js').read_text(encoding='utf-8')
-          if 'runScripts(' not in ads or 'mounted={}' not in ads or 'data/ads-config.json' not in ads:
+          if 'mgraw-ad-frame' not in ads or 'mounted={}' not in ads or 'data/ads-config.json' not in ads:
               raise SystemExit('Ads verification failed: ad renderer is missing or not wired to ads-config.json')
           pages=['index.html','latest-chapters.html','manga.html','chapter.html']
           for name in pages:
