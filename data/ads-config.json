@@ -1,4 +1,77 @@
 {
   "version": 2,
-  "sections": []
+  "sections": [
+    {
+      "id": "ad-1",
+      "name": "Ad Section 1",
+      "enabled": true,
+      "code": "<script>\n  atOptions = {\n    'key' : '16a5ea2b615e678027a10458f305d3e8',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/16a5ea2b615e678027a10458f305d3e8/invoke.js\"></script>\n<script>\n  atOptions = {\n    'key' : '6736f762925b63de22999e015376ca80',\n    'format' : 'iframe',\n    'height' : 250,\n    'width' : 300,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/6736f762925b63de22999e015376ca80/invoke.js\"></script>",
+      "placement": "start",
+      "between": "5"
+    },
+    {
+      "id": "ad-2",
+      "name": "Ad Section 2",
+      "enabled": true,
+      "code": "<script>\n  atOptions = {\n    'key' : '18490a80fdc92812627f072f19292079',\n    'format' : 'iframe',\n    'height' : 50,\n    'width' : 320,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/18490a80fdc92812627f072f19292079/invoke.js\"></script>",
+      "placement": "between",
+      "between": "2"
+    },
+    {
+      "id": "ad-3",
+      "name": "Ad Section 3",
+      "enabled": true,
+      "code": "<script src=\"https://agilelookout.com/e0/9f/ed/e09fed848790e548093c367632e3e0ab.js\"></script>",
+      "placement": "start",
+      "between": "5"
+    },
+    {
+      "id": "ad-4",
+      "name": "Ad Section 4",
+      "enabled": false,
+      "code": "",
+      "placement": "start",
+      "between": "5"
+    },
+    {
+      "id": "ad-5",
+      "name": "Ad Section 5",
+      "enabled": false,
+      "code": "",
+      "placement": "start",
+      "between": "5"
+    },
+    {
+      "id": "ad-6",
+      "name": "Ad Section 6",
+      "enabled": false,
+      "code": "",
+      "placement": "start",
+      "between": "5"
+    },
+    {
+      "id": "ad-7",
+      "name": "Ad Section 7",
+      "enabled": true,
+      "code": "<script>\n  atOptions = {\n    'key' : '16a5ea2b615e678027a10458f305d3e8',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/16a5ea2b615e678027a10458f305d3e8/invoke.js\"></script>",
+      "placement": "between",
+      "between": "3"
+    },
+    {
+      "id": "ad-8",
+      "name": "Ad Section 8",
+      "enabled": true,
+      "code": "<script>\n  atOptions = {\n    'key' : '16a5ea2b615e678027a10458f305d3e8',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/16a5ea2b615e678027a10458f305d3e8/invoke.js\"></script>",
+      "placement": "between",
+      "between": "5"
+    },
+    {
+      "id": "ad-9",
+      "name": "Ad Section 9",
+      "enabled": false,
+      "code": "<script>\n  atOptions = {\n    'key' : '16a5ea2b615e678027a10458f305d3e8',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/16a5ea2b615e678027a10458f305d3e8/invoke.js\"></script>\n<script>\n  atOptions = {\n    'key' : '6736f762925b63de22999e015376ca80',\n    'format' : 'iframe',\n    'height' : 250,\n    'width' : 300,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/6736f762925b63de22999e015376ca80/invoke.js\"></script>",
+      "placement": "end",
+      "between": "5"
+    }
+  ]
 }
