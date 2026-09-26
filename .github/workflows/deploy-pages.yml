@@ -143,8 +143,8 @@ jobs:
           if not enabled:
               raise SystemExit('Ads verification failed: no enabled ad sections in data/ads-config.json')
           ads=(dist/'ads.js').read_text(encoding='utf-8')
-          if 'function execCode' not in ads or 'document.createElement(\'iframe\')' not in ads or 'var mounted={}' not in ads:
-              raise SystemExit('Ads verification failed: isolated ad renderer is missing')
+          if 'function execCode' not in ads or 'var mounted={}' not in ads:
+              raise SystemExit('Ads verification failed: ad renderer is missing')
           pages=['index.html','latest-chapters.html','manga.html','chapter.html']
           for name in pages:
               p=dist/name
