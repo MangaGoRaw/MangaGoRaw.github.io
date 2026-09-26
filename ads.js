@@ -5,13 +5,16 @@ function log(){try{console.debug.apply(console,['[MangaGoRaw ads]'].concat([].sl
 function load(){return fetch(ROOT+'?v='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error();return r.json()}).catch(function(){return {sections:[]}})}
 function execCode(host,code){
   var tpl=document.createElement('template'); tpl.innerHTML=String(code||'');
+  var scripts=[];
   Array.prototype.slice.call(tpl.content.childNodes).forEach(function(n){
-    if(n.nodeType===1&&n.tagName.toLowerCase()==='script'){
-      var s=document.createElement('script');
-      for(var i=0;i<n.attributes.length;i++)s.setAttribute(n.attributes[i].name,n.attributes[i].value);
-      if(n.src)s.src=n.src;else s.text=n.textContent||'';
-      host.appendChild(s);
-    }else host.appendChild(n.cloneNode(true));
+    if(n.nodeType===1&&n.tagName.toLowerCase()==='script')scripts.push(n);
+    else host.appendChild(n.cloneNode(true));
+  });
+  scripts.forEach(function(n){
+    var s=document.createElement('script');
+    for(var i=0;i<n.attributes.length;i++)s.setAttribute(n.attributes[i].name,n.attributes[i].value);
+    if(n.src)s.src=n.src;else s.text=n.textContent||'';
+    host.appendChild(s);
   });
 }
 function slot(section,where){
