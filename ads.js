@@ -62,11 +62,20 @@ function runScripts(host,code){
     var n=scripts[i];
     var s=document.createElement('script');
     for(var j=0;j<n.attributes.length;j++){
-      s.setAttribute(n.attributes[j].name,n.attributes[j].value);
+      var attr=n.attributes[j];
+      if(attr.name.toLowerCase()==='async' || attr.name.toLowerCase()==='defer')continue;
+      s.setAttribute(attr.name,attr.value);
     }
 
     return new Promise(function(resolve){
       if(n.src){
+        /*
+         * Never preserve the provider's async/defer attribute here. These
+         * ad networks commonly depend on invoke.js running immediately after
+         * its preceding atOptions assignment/container markup. If async is
+         * left on the dynamically-created script, another ad can overwrite
+         * the global atOptions before invoke.js reads it.
+         */
         s.async=false;
         s.onload=function(){
           log('provider loaded',n.src);
