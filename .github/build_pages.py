@@ -145,7 +145,7 @@ if index.exists() and chapters:
     text=re.sub(r'<script[^>]+src=["\']/homepage-system\.js[^>]*></script>','',text,flags=re.I)
     index.write_text(text,encoding="utf-8")
 
-urls=[("https://mangagoraw.github.io/", ""),("https://mangagoraw.github.io/latest-chapters.html", "2026-09-17"),("https://mangagoraw.github.io/manga.html", "")]
+# Final public-page safeguards: keep Google Analytics and current ads renderer after all page rewrites.\nGA_SCRIPT='<script async src="https://www.googletagmanager.com/gtag/js?id=G-HC32QHLNXB"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-HC32QHLNXB");</script>'\nfor _public_name in ["index.html","latest-chapters.html","manga.html","chapter.html","latest-chapters.html"]:\n    _public_path=DIST/_public_name\n    if not _public_path.exists(): continue\n    _page=_public_path.read_text(encoding="utf-8")\n    if "G-HC32QHLNXB" not in _page:\n        _page=_page.replace("</head>",GA_SCRIPT+"</head>",1)\n    _page=re.sub(r'src="/ads\\.js\\?v=[^"]*"', f'src="/ads.js?v={ads_version}"', _page, flags=re.I)\n    if 'src="/ads.js' not in _page:\n        _page=_page.replace("</body>",f'<script src="/ads.js?v={ads_version}"></script></body>',1)\n    _public_path.write_text(_page,encoding="utf-8")\n\nurls=[("https://mangagoraw.github.io/", ""),("https://mangagoraw.github.io/latest-chapters.html", "2026-09-17"),("https://mangagoraw.github.io/manga.html", "")]
 for m in mangas:
     slug=m.get("slug") or m.get("id")
     if slug: urls.append(("https://mangagoraw.github.io/manga.html?slug="+slug,str(m.get("updated_at") or "")[:10]))
