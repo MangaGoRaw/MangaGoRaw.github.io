@@ -5,16 +5,13 @@ function log(){try{console.debug.apply(console,['[MangaGoRaw ads]'].concat([].sl
 function load(){return fetch(ROOT+'?v='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw Error();return r.json()}).catch(function(){return {sections:[]}})}
 function execCode(host,code){
   var tpl=document.createElement('template'); tpl.innerHTML=String(code||'');
-  var scripts=[];
   Array.prototype.slice.call(tpl.content.childNodes).forEach(function(n){
-    if(n.nodeType===1&&n.tagName.toLowerCase()==='script')scripts.push(n);
-    else host.appendChild(n.cloneNode(true));
-  });
-  scripts.forEach(function(n){
-    var s=document.createElement('script');
-    for(var i=0;i<n.attributes.length;i++)s.setAttribute(n.attributes[i].name,n.attributes[i].value);
-    if(n.src)s.src=n.src;else s.text=n.textContent||'';
-    host.appendChild(s);
+    if(n.nodeType===1&&n.tagName.toLowerCase()==='script'){
+      var s=document.createElement('script');
+      for(var i=0;i<n.attributes.length;i++)s.setAttribute(n.attributes[i].name,n.attributes[i].value);
+      if(n.src)s.src=n.src;else s.text=n.textContent||'';
+      host.appendChild(s);
+    }else host.appendChild(n.cloneNode(true));
   });
 }
 function slot(section,where){
@@ -22,7 +19,7 @@ function slot(section,where){
   var wrap=document.createElement('div');wrap.className='mgraw-ad-slot';wrap.setAttribute('data-ad-id',section.id);
   wrap.setAttribute('data-ad-placement',where);wrap.id='mgraw-ad-'+String(section.id).replace(/[^a-zA-Z0-9_-]/g,'-')+'-'+String(where).replace(/[^a-zA-Z0-9_-]/g,'-');
   wrap.style.cssText='display:flex;justify-content:center;align-items:center;width:100%;min-height:0;margin:18px auto;overflow:visible;clear:both;';
-  wrap.__mangagorawAdCode=String(section.code||'');
+  try{execCode(wrap,section.code)}catch(e){console.warn('MangaGoRaw ad failed',section.id,e)}
   return wrap;
 }
 function mount(cfg){
@@ -38,13 +35,13 @@ function mount(cfg){
     if(chapter&&p==='between'){
       var pages=document.querySelector('.pages'),imgs=pages&&pages.querySelectorAll('img.page');
       if(!imgs||imgs.length<n)return;
-      var el=slot(s,'between-'+n);if(el){imgs[n-1].insertAdjacentElement('afterend',el);try{execCode(el,el.__mangagorawAdCode)}catch(e){console.warn('MangaGoRaw ad failed',s.id,e)}}
+      var el=slot(s,'between-'+n);if(el)imgs[n-1].insertAdjacentElement('afterend',el);
     }else if(chapter&&(p==='start'||p==='end')){
       if(!reader)return;
-      var el=slot(s,p);if(el){p==='start'?reader.insertBefore(el,reader.firstChild):reader.appendChild(el);try{execCode(el,el.__mangagorawAdCode)}catch(e){console.warn('MangaGoRaw ad failed',s.id,e)}}
+      var el=slot(s,p);if(el)(p==='start'?reader.insertBefore(el,reader.firstChild):reader.appendChild(el));
     }else{
       var target=document.querySelector('main')||document.body,el=slot(s,p);
-      if(el){p==='start'?target.insertBefore(el,target.firstChild):target.appendChild(el);try{execCode(el,el.__mangagorawAdCode)}catch(e){console.warn('MangaGoRaw ad failed',s.id,e)}}
+      if(el)(p==='start'?target.insertBefore(el,target.firstChild):target.appendChild(el));
     }
   });
 }
