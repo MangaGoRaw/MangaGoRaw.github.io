@@ -66,7 +66,7 @@ window.mangaGoRawAnalytics={
   },
   event:function(name,data){window.gtag('event',name,data||{});}
 };
-})();\\n"
+})();\\n"""
     if path.name == "chapter-enhancements.js":
         start=text.find("function count(){"); end=text.find("function boot()",start)
         if start>=0 and end>start: text=text[:start]+"function count(){}\n"+text[end:]
