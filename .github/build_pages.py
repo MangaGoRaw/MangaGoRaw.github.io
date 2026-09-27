@@ -66,6 +66,14 @@ window.mangaGoRawAnalytics={
   },
   event:function(name,data){window.gtag('event',name,data||{});}
 };
+window.addEventListener('load',function(){
+  if(!window.__mgrawChapterPage && window.mangaGoRawAnalytics)
+    window.mangaGoRawAnalytics.pageView({
+      page_title:document.title,
+      page_location:location.href,
+      page_referrer:document.referrer
+    });
+});
 })();\\n"""
     if path.name == "chapter-enhancements.js":
         start=text.find("function count(){"); end=text.find("function boot()",start)
