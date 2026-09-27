@@ -10,7 +10,62 @@ async function api(path,opt={},tryNo=0){const method=String(opt.method||'GET').t
 function dec(s){const b=atob(s.replace(/\s/g,''));return new TextDecoder().decode(Uint8Array.from(b,c=>c.charCodeAt(0)))}function enc(s){const b=new TextEncoder().encode(s);let out='';for(let i=0;i<b.length;i+=32768)out+=String.fromCharCode(...b.subarray(i,i+32768));return btoa(out)}function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 async function read(path){const x=await api('/contents/'+path+'?ref='+BRANCH);return{data:JSON.parse(dec(x.content)),sha:x.sha}}async function write(path,data,sha,msg){const body={message:msg,content:enc(JSON.stringify(data,null,2)+'\n'),sha,branch:BRANCH};try{return await api('/contents/'+path,{method:'PUT',body:JSON.stringify(body)})}catch(e){if(!String(e.message).includes('GitHub 409'))throw e;const fresh=await read(path);body.sha=fresh.sha;return await api('/contents/'+path,{method:'PUT',body:JSON.stringify(body)})}}
 function selected(){return $('manga').value}function selectedManga(){return content.mangas.find(m=>m.id===selected())||{}}function allChapters(){const a=[...(content.chapters||[]).map(c=>({...c,_manual:false}))];for(const c of manual.chapters||[])if(!a.some(x=>x.slug===c.slug))a.push({...c,_manual:true});const m=selectedManga();return a.filter(c=>String(c.mangaId||c.manga_id||c.seriesId||c.series_id)==selected()||String(c.slug||'').toLowerCase().startsWith(String(m.slug||selected()).toLowerCase()+'-'))}
-function render(){const ms=Array.isArray(content.mangas)?content.mangas.filter(m=>m&&m.id):[];const sel=$('manga'),prev=sel.value;sel.innerHTML=ms.length?ms.slice().sort((a,b)=>String(a.title||a.id).localeCompare(String(b.title||b.id))).map(m=>'<option value="'+esc(m.id)+'">'+esc(m.title||m.id)+'</option>').join(''):'<option value="">No manga loaded</option>';if(prev&&ms.some(m=>String(m.id)===prev))sel.value=prev;const a=allChapters().sort((x,y)=>(Number(y.number)||0)-(Number(x.number)||0));const q=$('search').value.trim().toLowerCase();const shown=a.filter(c=>!q||[c.title,c.slug,c.number].join(' ').toLowerCase().includes(q));$('stats').textContent=shown.length+' chapters';$('list').innerHTML=shown.map(c=>'<div class="item"><div><b>'+esc(c.title||('Chapter '+c.number))+'</b><br><span class="muted">Chapter '+esc(c.number)+' · '+esc(c.slug)+' · '+(c.pages?.length||0)+' pages'+(c._manual?' · Manual':'')+'</span></div><div class="actions"><button type="button" class="editChapterBtn" data-slug="'+esc(encodeURIComponent(c.slug))+'" data-manual="'+(c._manual?'1':'0')">Edit / Upload</button><button type="button" class="danger deleteChapterBtn" data-slug="'+esc(encodeURIComponent(c.slug))+'" data-manual="'+(c._manual?'1':'0')">Delete</button></div></div>').join('')||'<p class="muted">No chapters for this manga.</p>';document.querySelectorAll('.editChapterBtn').forEach(b=>b.addEventListener('click',()=>window.editChapter(decodeURIComponent(b.dataset.slug),b.dataset.manual==='1')));document.querySelectorAll('.deleteChapterBtn').forEach(b=>b.addEventListener('click',()=>window.removeChapter(decodeURIComponent(b.dataset.slug),b.dataset.manual==='1')))}
+function render(){
+  const ms=Array.isArray(content.mangas)?content.mangas.filter(m=>m&&m.id):[];
+  const sel=$('manga'),prev=sel.value;
+  sel.innerHTML='';
+  if(ms.length){
+    ms.slice().sort((a,b)=>String(a.title||a.id).localeCompare(String(b.title||b.id))).forEach(m=>{
+      const o=document.createElement('option');
+      o.value=String(m.id);
+      o.textContent=String(m.title||m.id);
+      sel.appendChild(o);
+    });
+  }else{
+    const o=document.createElement('option');
+    o.value='';
+    o.textContent='No manga loaded';
+    sel.appendChild(o);
+  }
+  if(prev&&ms.some(m=>String(m.id)===prev))sel.value=prev;
+  const a=allChapters().sort((x,y)=>(Number(y.number)||0)-(Number(x.number)||0));
+  const q=$('search').value.trim().toLowerCase();
+  const shown=a.filter(c=>!q||[c.title,c.slug,c.number].join(' ').toLowerCase().includes(q));
+  $('stats').textContent=shown.length+' chapters';
+  const list=$('list');
+  list.innerHTML='';
+  if(!shown.length){
+    list.innerHTML='<p class="muted">No chapters for this manga.</p>';
+    return;
+  }
+  shown.forEach(c=>{
+    const item=document.createElement('div');
+    item.className='item';
+    const info=document.createElement('div');
+    const title=document.createElement('b');
+    title.textContent=String(c.title||('Chapter '+c.number));
+    info.appendChild(title);
+    info.appendChild(document.createElement('br'));
+    const meta=document.createElement('span');
+    meta.className='muted';
+    meta.textContent='Chapter '+c.number+' · '+c.slug+' · '+(c.pages?.length||0)+' pages'+(c._manual?' · Manual':'');
+    info.appendChild(meta);
+    const actions=document.createElement('div');
+    actions.className='actions';
+    const edit=document.createElement('button');
+    edit.type='button';
+    edit.textContent='Edit / Upload';
+    edit.addEventListener('click',()=>window.editChapter(c.slug,!!c._manual));
+    const del=document.createElement('button');
+    del.type='button';
+    del.className='danger';
+    del.textContent='Delete';
+    del.addEventListener('click',()=>window.removeChapter(c.slug,!!c._manual));
+    actions.append(edit,del);
+    item.append(info,actions);
+    list.appendChild(item);
+  });
+}
 
 function reset(){current=null;currentManual=true;$('heading').textContent='Add chapter';$('num').value='';$('title').value='';$('slug').value=(selectedManga().slug||selected())+'-raw-';$('mangaName').value=selectedManga().title||'';$('files').value='';$('filesInfo').textContent='';$('uploadInfo').textContent='No upload started.';$('bar').style.width='0';$('delete').classList.add('hidden');$('editor').classList.remove('hidden');$('num').focus()}
 window.editChapter=(slug,isManual)=>{const src=isManual?manual.chapters:content.chapters,c=src.find(x=>x.slug===slug);if(!c)return;current={...c};currentManual=isManual;$('heading').textContent='Edit chapter — upload images';$('num').value=c.number||'';$('title').value=c.title||'';$('slug').value=c.slug||'';$('mangaName').value=selectedManga().title||'';$('delete').classList.remove('hidden');$('editor').classList.remove('hidden');window.scrollTo({top:$('editor').offsetTop-20,behavior:'smooth'})};
