@@ -47,7 +47,8 @@ jobs:
               text = p.read_text(encoding='utf-8')
               # Remove legacy Google Analytics / Tag Manager snippets and duplicate verification tags.
               text = re.sub(r'<script[^>]+googletagmanager\.com/gtag/js[^>]*></script>', '', text, flags=re.I)
-              # Remove only standalone legacy GA inline snippets; never remove application scripts.\n              text = re.sub(r'<script[^>]*>\\s*window\\.dataLayer\\s*=.*?gtag\\([\\s\\S]*?</script>', '', text, flags=re.I)
+              # Remove only standalone legacy GA inline snippets; never remove application scripts.
+              text = re.sub(r'<script[^>]*>.*?window\\.dataLayer.*?gtag.*?</script>', '', text, flags=re.I|re.S)
               # The homepage feed is rendered statically during the build. Remove the
               # legacy runtime renderer so it cannot replace the populated feed with an empty state.
               text = re.sub(r'<script[^>]+src=["\']/homepage-system\.js(?:\?[^"\']*)?["\'][^>]*></script>', '', text, flags=re.I)
