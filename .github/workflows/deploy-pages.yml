@@ -123,8 +123,20 @@ jobs:
           sitemap = (dist/'sitemap.xml').read_text(encoding='utf-8')
           if 'Sitemap: https://mangagoraw.github.io/sitemap.xml' not in robots:
               raise SystemExit('SEO verification failed: robots.txt sitemap declaration is missing')
+          content_data = json.loads((dist/'data/content.json').read_text(encoding='utf-8'))
           manual = json.loads((dist/'data/manual-chapters.json').read_text(encoding='utf-8'))
-          expected = {str(c.get('slug')).strip() for c in manual.get('chapters',[]) if c.get('slug') and c.get('pages')}
+          merged = {}
+          for source in [content_data.get('chapters',[]), manual.get('chapters',[])]:
+              for ch in source:
+                  slug = str(ch.get('slug') or '').strip()
+                  if not slug:
+                      continue
+                  pages = ch.get('pages') if isinstance(ch.get('pages'), list) else []
+                  if slug not in merged:
+                      merged[slug] = list(pages)
+                  else:
+                      merged[slug] = list(dict.fromkeys([*merged[slug], *pages]))
+          expected = {slug for slug, pages in merged.items() if pages}
           found = set(re.findall(r'https://mangagoraw\.github\.io/chapter\.html\?slug=([^<]+)', sitemap))
           from urllib.parse import unquote
           found = {unquote(x) for x in found}
