@@ -260,11 +260,36 @@ for _public_name in ["index.html","latest-chapters.html","manga.html","chapter.h
         _page=_page.replace("</body>",f'<script src="/ads.js?v={ads_version}"></script></body>',1)
     _public_path.write_text(_page,encoding="utf-8")
 
+# Build the sitemap from the same merged chapter sources used by the site,
+# re-reading every chapter source here so a late/manual upload can never be
+# omitted just because another build step has a stale chapter list.
+sitemap_chapter_map={}
+for source_name in ["data/content.json","data/manual-chapters.json","data/extra-chapters.json","data/upcoming-chapters.json"]:
+    source_path=DIST/source_name
+    if not source_path.exists(): continue
+    source_data=json.loads(source_path.read_text(encoding="utf-8"))
+    for raw_chapter in source_data.get("chapters",[]):
+        if not isinstance(raw_chapter,dict): continue
+        slug=str(raw_chapter.get("slug") or "").strip()
+        if not slug: continue
+        pages=raw_chapter.get("pages") if isinstance(raw_chapter.get("pages"),list) else []
+        existing=sitemap_chapter_map.get(slug)
+        if existing is None:
+            sitemap_chapter_map[slug]=dict(raw_chapter)
+        else:
+            merged=dict(existing)
+            old_pages=existing.get("pages") if isinstance(existing.get("pages"),list) else []
+            merged.update(raw_chapter)
+            merged["pages"]=list(dict.fromkeys([*old_pages,*pages]))
+            sitemap_chapter_map[slug]=merged
+
+sitemap_chapters=list(sitemap_chapter_map.values())
 urls=[("https://mangagoraw.github.io/", ""),("https://mangagoraw.github.io/latest-chapters.html", "2026-09-17"),("https://mangagoraw.github.io/manga.html", "")]
 for m in mangas:
     slug=m.get("slug") or m.get("id")
     if slug: urls.append(("https://mangagoraw.github.io/manga.html?slug="+slug,str(m.get("updated_at") or "")[:10]))
-for c in [c for c in chapters if c.get("pages")]: urls.append(("https://mangagoraw.github.io/chapter.html?slug="+quote(str(c["slug"]),safe=""),str(c.get("updatedAt") or c.get("updated_at") or c.get("createdAt") or c.get("created_at") or "")[:10]))
+for c in [c for c in sitemap_chapters if c.get("pages")]:
+    urls.append(("https://mangagoraw.github.io/chapter.html?slug="+quote(str(c["slug"]),safe=""),str(c.get("updatedAt") or c.get("updated_at") or c.get("createdAt") or c.get("created_at") or "")[:10]))
 seen=set(); lines=['<?xml version="1.0" encoding="UTF-8"?>','<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
 for url,date in urls:
     if url in seen: continue
