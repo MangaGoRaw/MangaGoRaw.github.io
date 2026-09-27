@@ -5,7 +5,7 @@
       "id": "ad-1",
       "name": "Ad Section 1",
       "enabled": true,
-      "code": "<script>\n  atOptions = {\n    'key' : '16a5ea2b615e678027a10458f305d3e8',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/16a5ea2b615e678027a10458f305d3e8/invoke.js\"></script>\n<script>\n  atOptions = {\n    'key' : '6736f762925b63de22999e015376ca80',\n    'format' : 'iframe',\n    'height' : 250,\n    'width' : 300,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/6736f762925b63de22999e015376ca80/invoke.js\"></script>",
+      "code": "<script>\n  atOptions = {\n    'key' : '16a5ea2b615e678027a10458f305d3e8',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/16a5ea2b615e678027a10458f305d3e8/invoke.js\"></script>\n<script>\n  atOptions = {\n    'key' : '6736f762925b63de22999e015376ca80',\n    'format' : 'iframe',\n    'height' : 250,\n    'width' : 300,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/6736f762925b63de22999e015376ca80/invoke.js\"></script>\n<script>\n  atOptions = {\n    'key' : '7304e34a389561f0dc18bb08137c0716',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://www.highrevenueformat.com/7304e34a389561f0dc18bb08137c0716/invoke.js\"></script>",
       "placement": "start",
       "between": "5"
     },
@@ -29,31 +29,31 @@
       "id": "ad-4",
       "name": "Ad Section 4",
       "enabled": false,
-      "code": "",
+      "code": "<script>\n  atOptions = {\n    'key' : '1e74ca09a591bd8988a6f04fa8c9689a',\n    'format' : 'iframe',\n    'height' : 250,\n    'width' : 300,\n    'params' : {}\n  };\n</script>\n<script src=\"https://www.highrevenueformat.com/1e74ca09a591bd8988a6f04fa8c9689a/invoke.js\"></script>",
       "placement": "start",
       "between": "5"
     },
     {
       "id": "ad-5",
       "name": "Ad Section 5",
-      "enabled": false,
-      "code": "",
+      "enabled": true,
+      "code": "<script>\n  atOptions = {\n    'key' : '71bf6d7866b1e8fa3208b38b0ad6718c',\n    'format' : 'iframe',\n    'height' : 60,\n    'width' : 468,\n    'params' : {}\n  };\n</script>\n<script src=\"https://www.highrevenueformat.com/71bf6d7866b1e8fa3208b38b0ad6718c/invoke.js\"></script>\n<script>\n  atOptions = {\n    'key' : '1e74ca09a591bd8988a6f04fa8c9689a',\n    'format' : 'iframe',\n    'height' : 250,\n    'width' : 300,\n    'params' : {}\n  };\n</script>\n<script src=\"https://www.highrevenueformat.com/1e74ca09a591bd8988a6f04fa8c9689a/invoke.js\"></script>",
       "placement": "start",
-      "between": "5"
+      "between": "11"
     },
     {
       "id": "ad-6",
       "name": "Ad Section 6",
-      "enabled": false,
-      "code": "",
-      "placement": "start",
-      "between": "5"
+      "enabled": true,
+      "code": "<script>\n  atOptions = {\n    'key' : '71bf6d7866b1e8fa3208b38b0ad6718c',\n    'format' : 'iframe',\n    'height' : 60,\n    'width' : 468,\n    'params' : {}\n  };\n</script>\n<script src=\"https://www.highrevenueformat.com/71bf6d7866b1e8fa3208b38b0ad6718c/invoke.js\"></script>\n<script>\n  atOptions = {\n    'key' : '1e74ca09a591bd8988a6f04fa8c9689a',\n    'format' : 'iframe',\n    'height' : 250,\n    'width' : 300,\n    'params' : {}\n  };\n</script>\n<script src=\"https://www.highrevenueformat.com/1e74ca09a591bd8988a6f04fa8c9689a/invoke.js\"></script>",
+      "placement": "between",
+      "between": "8"
     },
     {
       "id": "ad-7",
       "name": "Ad Section 7",
       "enabled": true,
-      "code": "<script>\n  atOptions = {\n    'key' : '16a5ea2b615e678027a10458f305d3e8',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/16a5ea2b615e678027a10458f305d3e8/invoke.js\"></script>",
+      "code": "<script>\n  atOptions = {\n    'key' : '16a5ea2b615e678027a10458f305d3e8',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/16a5ea2b615e678027a10458f305d3e8/invoke.js\"></script>\n<script>\n  atOptions = {\n    'key' : '7304e34a389561f0dc18bb08137c0716',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://www.highrevenueformat.com/7304e34a389561f0dc18bb08137c0716/invoke.js\"></script>",
       "placement": "between",
       "between": "3"
     },
@@ -61,7 +61,7 @@
       "id": "ad-8",
       "name": "Ad Section 8",
       "enabled": true,
-      "code": "<script>\n  atOptions = {\n    'key' : '16a5ea2b615e678027a10458f305d3e8',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/16a5ea2b615e678027a10458f305d3e8/invoke.js\"></script>",
+      "code": "<script>\n  atOptions = {\n    'key' : '16a5ea2b615e678027a10458f305d3e8',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/16a5ea2b615e678027a10458f305d3e8/invoke.js\"></script>\n<script>\n  atOptions = {\n    'key' : '7304e34a389561f0dc18bb08137c0716',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://www.highrevenueformat.com/7304e34a389561f0dc18bb08137c0716/invoke.js\"></script>",
       "placement": "between",
       "between": "5"
     },
@@ -69,7 +69,7 @@
       "id": "ad-9",
       "name": "Ad Section 9",
       "enabled": true,
-      "code": "<script>\n  atOptions = {\n    'key' : '16a5ea2b615e678027a10458f305d3e8',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/16a5ea2b615e678027a10458f305d3e8/invoke.js\"></script>\n<script>\n  atOptions = {\n    'key' : '6736f762925b63de22999e015376ca80',\n    'format' : 'iframe',\n    'height' : 250,\n    'width' : 300,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/6736f762925b63de22999e015376ca80/invoke.js\"></script>",
+      "code": "<script>\n  atOptions = {\n    'key' : '16a5ea2b615e678027a10458f305d3e8',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/16a5ea2b615e678027a10458f305d3e8/invoke.js\"></script>\n<script>\n  atOptions = {\n    'key' : '6736f762925b63de22999e015376ca80',\n    'format' : 'iframe',\n    'height' : 250,\n    'width' : 300,\n    'params' : {}\n  };\n</script>\n<script src=\"https://agilelookout.com/6736f762925b63de22999e015376ca80/invoke.js\"></script>\n<script>\n  atOptions = {\n    'key' : '7304e34a389561f0dc18bb08137c0716',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://www.highrevenueformat.com/7304e34a389561f0dc18bb08137c0716/invoke.js\"></script>",
       "placement": "end",
       "between": "5"
     }
