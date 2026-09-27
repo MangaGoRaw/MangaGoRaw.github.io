@@ -122,6 +122,12 @@ admin_source=ROOT / "admin"
 admin_target=DIST / "admin"
 if admin_source.exists():
     shutil.copytree(admin_source, admin_target, dirs_exist_ok=True)
+    # Pages-safe fallback route for the chapter admin UI.
+    chapter_admin = admin_source / "chapters.html"
+    chapter_route = admin_target / "chapters" / "index.html"
+    if chapter_admin.exists():
+        chapter_route.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(chapter_admin, chapter_route)
 
 for live_dir in ["chapter-images", "manga-covers"]:
     source = ROOT / live_dir
