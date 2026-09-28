@@ -148,6 +148,45 @@ jobs:
           print(f'SEO verified: {len(found)} chapter URL(s) represented in sitemap; robots.txt points to sitemap.xml.')
           PY
 
+      - name: Verify no broken published chapter images
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          from urllib.parse import urlparse
+          dist=Path('dist')
+          bad=[]
+          merged={}
+          for name in ['data/content.json','data/manual-chapters.json','data/extra-chapters.json','data/upcoming-chapters.json']:
+              p=dist/name
+              if not p.exists(): continue
+              data=json.loads(p.read_text(encoding='utf-8'))
+              for c in data.get('chapters',[]):
+                  slug=str(c.get('slug') or '').strip()
+                  if not slug: continue
+                  old=merged.get(slug,{'pages':[]})
+                  pages=list(dict.fromkeys([*(old.get('pages') or []),*(c.get('pages') or [])]))
+                  merged[slug]={**old,**c,'pages':pages}
+          raw='https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/'
+          pages_base='https://mangagoraw.github.io/'
+          for slug,c in merged.items():
+              pages=c.get('pages') or []
+              if not pages: continue
+              valid=0
+              for page in pages:
+                  value=page if isinstance(page,str) else (page.get('path') or page.get('url') or page.get('src') or '')
+                  value=str(value)
+                  if value.startswith(raw): value=value[len(raw):]
+                  elif value.startswith(pages_base): value=value[len(pages_base):]
+                  value=value.lstrip('/')
+                  if value and (dist/value).is_file(): valid+=1
+                  else: bad.append(f'{slug}: {value}')
+              if valid==0: bad.append(f'{slug}: no valid image files')
+          if bad:
+              raise SystemExit('Broken published chapter image reference(s):\\n'+'\\n'.join(bad[:30]))
+          print('Chapter image audit passed: every published chapter has valid local image references.')
+          PY
+
       - name: Verify analytics and ads wiring
         run: |
           python3 - <<'PY'
@@ -159,6 +198,10 @@ jobs:
           enabled=[s for s in cfg.get('sections',[]) if s.get('enabled') and str(s.get('code') or '').strip()]
           if not enabled:
               raise SystemExit('Ads verification failed: no enabled ad sections in data/ads-config.json')
+          for section in enabled:
+              sid=str(section.get('id') or '').strip()
+              if not sid or not (dist/'ads'/(sid+'.html')).is_file():
+                  raise SystemExit(f'Ads verification failed: generated ad document missing for {sid}')
           ads=(dist/'ads.js').read_text(encoding='utf-8')
           if 'mgraw-ad-frame' not in ads or 'mounted={}' not in ads or 'data/ads-config.json' not in ads:
               raise SystemExit('Ads verification failed: ad renderer is missing or not wired to ads-config.json')
