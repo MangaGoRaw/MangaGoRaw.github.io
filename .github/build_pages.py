@@ -219,11 +219,26 @@ def cover_for(m):
     return ""
 chapters.sort(key=chapter_time, reverse=True)
 
+def chapter_has_local_image(c):
+    pages=c.get("pages") if isinstance(c.get("pages"),list) else []
+    raw_prefix="https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/"
+    pages_prefix="https://mangagoraw.github.io/"
+    for page in pages:
+        value=page if isinstance(page,str) else (page.get("path") or page.get("url") or page.get("src") or "")
+        value=str(value)
+        if value.startswith(raw_prefix): value=value[len(raw_prefix):]
+        elif value.startswith(pages_prefix): value=value[len(pages_prefix):]
+        value=value.lstrip("/")
+        if value and (DIST/value).is_file(): return True
+    return False
+
+published_chapters=[c for c in chapters if chapter_has_local_image(c)]
+
 index=DIST/"index.html"
 if index.exists() and chapters:
     text=index.read_text(encoding="utf-8")
     cards=[]; items=[]
-    for i,c in enumerate(chapters[:10]):
+    for i,c in enumerate(published_chapters[:10]):
         m=manga_for(c); name=m.get("title") or c.get("mangaId") or "Manga"; number=c.get("number","")
         slug=str(c.get("slug") or ""); href="/chapter.html?slug="+quote(slug,safe="")
         label=html.escape(str(name)); num=html.escape(str(number)); cls=" featured" if i==0 else ""
@@ -239,23 +254,14 @@ if index.exists() and chapters:
     text=re.sub(r'<script[^>]+src=["\']/homepage-system\.js[^>]*></script>','',text,flags=re.I)
     index.write_text(text,encoding="utf-8")
 
-# Final public-page safeguards: keep Google Analytics and current ads renderer after all page rewrites.
-GA_SCRIPT='<script async src="https://www.googletagmanager.com/gtag/js?id=G-HC32QHLNXB"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-HC32QHLNXB");</script>'
-# Ensure chapter analytics uses an explicit page_view after dynamic chapter metadata is known.
-_chapter_analytics = DIST / "chapter.html"
-if _chapter_analytics.exists():
-    _ct = _chapter_analytics.read_text(encoding="utf-8")
-    _ct = _ct.replace("gtag('js',new Date());gtag('config','G-HC32QHLNXB');", "gtag('js',new Date());gtag('config','G-HC32QHLNXB',{send_page_view:false});")
-    _ct = _ct.replace("if(window.mangaGoRawAnalytics)window.mangaGoRawAnalytics.pageView({chapter_key:", "if(window.mangaGoRawAnalytics)window.mangaGoRawAnalytics.pageView({chapter_key:")
-    _chapter_analytics.write_text(_ct,encoding="utf-8")
-
+# Final public-page safeguards: use one generated analytics.js tag and the current ads renderer.
 for _public_name in ["index.html","latest-chapters.html","manga.html","chapter.html"]:
     _public_path=DIST/_public_name
     if not _public_path.exists(): continue
     _page=_public_path.read_text(encoding="utf-8")
-    if "G-HC32QHLNXB" not in _page:
-        _page=_page.replace("</head>",GA_SCRIPT+"</head>",1)
-    _page=re.sub(r'src="/ads\.js\?v=[^"]*"', f'src="/ads.js?v={ads_version}"', _page, flags=re.I)
+    _page=re.sub(r'<script[^>]+googletagmanager\\.com/gtag/js[^>]*></script>', '', _page, flags=re.I)
+    _page=re.sub(r'<script[^>]*>.*?window\\.dataLayer.*?gtag.*?</script>', '', _page, flags=re.I|re.S)
+    _page=re.sub(r'src="/ads\\.js\\?v=[^"]*"', f'src="/ads.js?v={ads_version}"', _page, flags=re.I)
     if 'src="/ads.js' not in _page:
         _page=_page.replace("</body>",f'<script src="/ads.js?v={ads_version}"></script></body>',1)
     _public_path.write_text(_page,encoding="utf-8")
@@ -284,11 +290,12 @@ for source_name in ["data/content.json","data/manual-chapters.json","data/extra-
             sitemap_chapter_map[slug]=merged
 
 sitemap_chapters=list(sitemap_chapter_map.values())
-urls=[("https://mangagoraw.github.io/", ""),("https://mangagoraw.github.io/latest-chapters.html", "2026-09-17"),("https://mangagoraw.github.io/manga.html", "")]
+latest_date=max([chapter_time(c) for c in published_chapters] or [""])[:10]
+urls=[("https://mangagoraw.github.io/", latest_date),("https://mangagoraw.github.io/latest-chapters.html", latest_date),("https://mangagoraw.github.io/manga.html", latest_date)]
 for m in mangas:
     slug=m.get("slug") or m.get("id")
-    if slug: urls.append(("https://mangagoraw.github.io/manga.html?slug="+slug,str(m.get("updated_at") or "")[:10]))
-for c in [c for c in sitemap_chapters if c.get("pages")]:
+    if slug: urls.append(("https://mangagoraw.github.io/manga.html?slug="+quote(str(slug),safe=""),str(m.get("updated_at") or "")[:10]))
+for c in [c for c in sitemap_chapter_map.values() if c.get("pages") and chapter_has_local_image(c)]:
     urls.append(("https://mangagoraw.github.io/chapter.html?slug="+quote(str(c["slug"]),safe=""),str(c.get("updatedAt") or c.get("updated_at") or c.get("createdAt") or c.get("created_at") or "")[:10]))
 seen=set(); lines=['<?xml version="1.0" encoding="UTF-8"?>','<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
 for url,date in urls:
@@ -297,4 +304,4 @@ for url,date in urls:
 lines.append("</urlset>"); (DIST/"sitemap.xml").write_text("\n".join(lines)+"\n",encoding="utf-8")
 (DIST/"robots.txt").write_text("User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: https://mangagoraw.github.io/sitemap.xml\n",encoding="utf-8")
 (DIST/".nojekyll").touch()
-print(f"Built {DIST} successfully with {len(chapters)} homepage chapters and cover-aware cards.")
+print(f"Built {DIST} successfully with {len(published_chapters)} published image-backed chapters and cover-aware cards.")
