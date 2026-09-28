@@ -295,8 +295,11 @@ urls=[("https://mangagoraw.github.io/", latest_date),("https://mangagoraw.github
 for m in mangas:
     slug=m.get("slug") or m.get("id")
     if slug: urls.append(("https://mangagoraw.github.io/manga.html?slug="+quote(str(slug),safe=""),str(m.get("updated_at") or "")[:10]))
+canonical_aliases={"one-piece-raw-1194":"one-piece-raw-jp-1194"}
 for c in [c for c in sitemap_chapter_map.values() if c.get("pages") and chapter_has_local_image(c)]:
-    urls.append(("https://mangagoraw.github.io/chapter.html?slug="+quote(str(c["slug"]),safe=""),str(c.get("updatedAt") or c.get("updated_at") or c.get("createdAt") or c.get("created_at") or "")[:10]))
+    slug=str(c["slug"])
+    if slug in canonical_aliases: continue
+    urls.append(("https://mangagoraw.github.io/chapter.html?slug="+quote(slug,safe=""),str(c.get("updatedAt") or c.get("updated_at") or c.get("createdAt") or c.get("created_at") or "")[:10]))
 seen=set(); lines=['<?xml version="1.0" encoding="UTF-8"?>','<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
 for url,date in urls:
     if url in seen: continue
