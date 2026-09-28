@@ -136,7 +136,8 @@ jobs:
                       merged[slug] = list(pages)
                   else:
                       merged[slug] = list(dict.fromkeys([*merged[slug], *pages]))
-          expected = {slug for slug, pages in merged.items() if pages}
+          canonical_aliases = {'one-piece-raw-1194': 'one-piece-raw-jp-1194'}
+          expected = {slug for slug, pages in merged.items() if pages and slug not in canonical_aliases}
           found = set(re.findall(r'https://mangagoraw\.github\.io/chapter\.html\?slug=([^<]+)', sitemap))
           from urllib.parse import unquote
           found = {unquote(x) for x in found}
