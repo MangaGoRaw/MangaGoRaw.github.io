@@ -150,6 +150,19 @@ for name in ["data/content.json","data/manual-chapters.json","data/extra-chapter
     if source.exists():
         target=DIST/name; target.parent.mkdir(parents=True,exist_ok=True); shutil.copy2(source,target)
 
+# Rewrite generated chapter data to the public non-hidden upload folders and
+# same-origin Pages URLs. The source repository keeps its existing upload paths.
+for _data_name in ["data/content.json","data/manual-chapters.json","data/extra-chapters.json","data/upcoming-chapters.json"]:
+    _data_path = DIST / _data_name
+    if not _data_path.exists(): continue
+    _data_text = _data_path.read_text(encoding="utf-8")
+    _data_text = re.sub(r"(/chapter-images/[^\"]*)/\.upload-", r"\1/upload-", _data_text)
+    _data_text = _data_text.replace(
+        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/",
+        "https://mangagoraw.github.io/"
+    )
+    _data_path.write_text(_data_text, encoding="utf-8")
+
 # Generate isolated ad documents so providers that depend on document.write/currentScript work normally.
 ads_cfg_path=DIST/"data/ads-config.json"
 ads_dir=DIST/"ads"
