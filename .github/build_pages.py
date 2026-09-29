@@ -150,18 +150,45 @@ for name in ["data/content.json","data/manual-chapters.json","data/extra-chapter
     if source.exists():
         target=DIST/name; target.parent.mkdir(parents=True,exist_ok=True); shutil.copy2(source,target)
 
-# Rewrite generated chapter data to the public non-hidden upload folders and
-# same-origin Pages URLs. The source repository keeps its existing upload paths.
+# Rewrite generated chapter image references from hidden repository folders to
+# public Pages paths, copying each exact source file into the Pages artifact.
+_RAW_PREFIX = "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/"
+_PAGES_PREFIX = "https://mangagoraw.github.io/"
+
+def _publish_chapter_value(value):
+    if not isinstance(value, str):
+        return value
+    rel = value
+    if rel.startswith(_RAW_PREFIX):
+        rel = rel[len(_RAW_PREFIX):]
+    elif rel.startswith(_PAGES_PREFIX):
+        rel = rel[len(_PAGES_PREFIX):]
+    rel = rel.lstrip("/")
+    if "/.upload-" in rel:
+        public_rel = rel.replace("/.upload-", "/upload-", 1)
+        source_path = ROOT / rel
+        target_path = DIST / public_rel
+        if source_path.is_file():
+            target_path.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source_path, target_path)
+            return _PAGES_PREFIX + public_rel
+    if rel.startswith("chapter-images/") and (DIST / rel).is_file():
+        return _PAGES_PREFIX + rel
+    return value
+
+def _publish_chapter_data(value):
+    if isinstance(value, dict):
+        return {k: _publish_chapter_data(v) for k, v in value.items()}
+    if isinstance(value, list):
+        return [_publish_chapter_data(v) for v in value]
+    return _publish_chapter_value(value)
+
 for _data_name in ["data/content.json","data/manual-chapters.json","data/extra-chapters.json","data/upcoming-chapters.json"]:
     _data_path = DIST / _data_name
     if not _data_path.exists(): continue
-    _data_text = _data_path.read_text(encoding="utf-8")
-    _data_text = re.sub(r"(/chapter-images/[^\"]*)/\.upload-", r"\1/upload-", _data_text)
-    _data_text = _data_text.replace(
-        "https://raw.githubusercontent.com/MangaGoRaw/MangaGoRaw.github.io/main/",
-        "https://mangagoraw.github.io/"
-    )
-    _data_path.write_text(_data_text, encoding="utf-8")
+    _data_obj = json.loads(_data_path.read_text(encoding="utf-8"))
+    _data_obj = _publish_chapter_data(_data_obj)
+    _data_path.write_text(json.dumps(_data_obj, ensure_ascii=False, indent=2), encoding="utf-8")
 
 # Generate isolated ad documents so providers that depend on document.write/currentScript work normally.
 ads_cfg_path=DIST/"data/ads-config.json"
