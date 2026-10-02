@@ -513,7 +513,7 @@
       "id": "manual-1790939824108",
       "mangaId": "kagurabachi",
       "number": 133,
-      "title": "カグラバチ raw ( Kagurabachi raw ) 第133話",
+      "title": "カグラバチ raw ( Kagurabachi raw ) 第133話 | Jap",
       "slug": "kagurabachi-raw-Jap-133",
       "country": "JP",
       "pages": [
@@ -532,8 +532,10 @@
         "/chapter-images/kagurabachi/chapter-kagurabachi-raw-Jap-133/.upload-1790940559872/0013-13.jpg"
       ],
       "createdAt": "2026-10-02T11:17:00.977Z",
-      "updatedAt": "2026-10-02T11:36:44.818Z",
-      "updated_at": "2026-10-02T11:36:44.818Z"
+      "updatedAt": "2026-10-02T12:35:00.000Z",
+      "updated_at": "2026-10-02T12:35:00.000Z",
+      "seoTitle": "Kagurabachi Raw Chapter 133 Japanese | カグラバチ 第133話 | MangaGoRaw",
+      "description": "Read Kagurabachi Raw Chapter 133 Japanese (カグラバチ 第133話) online on MangaGoRaw. View all 13 chapter pages."
     },
     {
       "id": "manual-1790941038549",
@@ -541,7 +543,7 @@
       "number": 133,
       "title": "カグラバチ raw ( Kagurabachi raw ) 第133話 | Eng",
       "slug": "kagurabachi-raw-eng-133",
-      "country": "JP",
+      "country": "ENG",
       "pages": [
         "/chapter-images/kagurabachi/chapter-kagurabachi-raw-eng-133/.upload-1790941243055/0001-1.jpg",
         "/chapter-images/kagurabachi/chapter-kagurabachi-raw-eng-133/.upload-1790941243055/0002-2.jpg",
@@ -558,8 +560,10 @@
         "/chapter-images/kagurabachi/chapter-kagurabachi-raw-eng-133/.upload-1790941243055/0013-13.jpg"
       ],
       "createdAt": "2026-10-02T11:37:16.654Z",
-      "updatedAt": "2026-10-02T11:42:48.281Z",
-      "updated_at": "2026-10-02T11:42:48.281Z"
+      "updatedAt": "2026-10-02T12:35:00.000Z",
+      "updated_at": "2026-10-02T12:35:00.000Z",
+      "seoTitle": "Kagurabachi Raw Chapter 133 English | カグラバチ 第133話 | MangaGoRaw",
+      "description": "Read Kagurabachi Raw Chapter 133 in English online on MangaGoRaw. View all 13 chapter pages."
     },
     {
       "id": "manual-1790941523906",
@@ -590,14 +594,16 @@
         "/chapter-images/days/chapter-sakamoto-days-raw-jap-277/.upload-1790942427841/0019-19.jpg"
       ],
       "createdAt": "2026-10-02T11:45:21.650Z",
-      "updatedAt": "2026-10-02T12:02:21.464Z",
-      "updated_at": "2026-10-02T12:02:21.464Z"
+      "updatedAt": "2026-10-02T12:35:00.000Z",
+      "updated_at": "2026-10-02T12:35:00.000Z",
+      "seoTitle": "SAKAMOTO DAYS Raw Chapter 277 Japanese | サカモトデイズ 第277話 | MangaGoRaw",
+      "description": "Read SAKAMOTO DAYS Chapter 277 Japanese raw (サカモトデイズ 第277話) online on MangaGoRaw. View all 19 chapter pages."
     },
     {
       "id": "manual-1790941698880",
       "mangaId": "days",
       "number": 277,
-      "title": "サカモトデイズ raw ( SAKAMOTO DAYS raw ) 第277話 | Eng",
+      "title": "SAKAMOTO DAYS Raw Chapter 277 (English) | サカモトデイズ 第277話",
       "slug": "sakamoto-days-raw-eng-277",
       "country": "ENG",
       "pages": [
@@ -622,8 +628,10 @@
         "/chapter-images/days/chapter-sakamoto-days-raw-eng-277/.upload-1790942101115/0019-19.jpg"
       ],
       "createdAt": "2026-10-02T11:48:16.274Z",
-      "updatedAt": "2026-10-02T12:20:00.000Z",
-      "updated_at": "2026-10-02T12:20:00.000Z"
+      "updatedAt": "2026-10-02T12:35:00.000Z",
+      "updated_at": "2026-10-02T12:35:00.000Z",
+      "seoTitle": "SAKAMOTO DAYS Raw Chapter 277 English | MangaGoRaw",
+      "description": "Read SAKAMOTO DAYS Raw Chapter 277 in English on MangaGoRaw. View all 19 chapter pages online."
     }
   ]
 }
