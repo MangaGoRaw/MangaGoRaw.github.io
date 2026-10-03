@@ -437,7 +437,7 @@
       "id": "manual-1790605018180",
       "mangaId": "blue-lock",
       "number": 363,
-      "title": "ブルーロック raw ( Blue Lock raw ) 第363話",
+      "title": "ブルーロック raw - Blue Lock raw 第363話 | JAP",
       "slug": "blue-loc-raw-363",
       "country": "JP",
       "pages": [
@@ -459,10 +459,11 @@
         "/chapter-images/blue-lock/chapter-blue-loc-raw-363/.upload-1790605181481/0016-16.jpg"
       ],
       "createdAt": "2026-09-28T14:16:58.159Z",
-      "updatedAt": "2026-09-28T14:28:00.306Z",
+      "updatedAt": "2026-10-03T09:00:00.000Z",
       "updated_at": "2026-09-28T14:28:00.306Z",
-      "seoTitle": "Blue Lock Raw Chapter 363 | ブルーロック 第363話 | MangaGoRaw",
-      "description": "Read Blue Lock Chapter 363 raw (ブルーロック 第363話) online on MangaGoRaw. View all chapter pages."
+      "seoTitle": "Blue Lock Raw Chapter 363 Japanese | ブルーロック 第363話 | MangaGoRaw",
+      "description": "Read Blue Lock Raw Chapter 363 in Japanese (ブルーロック 第363話) online on MangaGoRaw. View all 16 chapter pages.",
+      "language": "ja"
     },
     {
       "id": "manual-1790676124037",
@@ -470,7 +471,7 @@
       "number": 889,
       "title": "キングダム raw ( Kingdom Raw ) 第889話 | ENG",
       "slug": "kingdom-raw-jap-889",
-      "country": "JP",
+      "country": "ENG",
       "pages": [
         "/chapter-images/kingdom-raw/chapter-kingdom-raw-jap-889/.upload-1790678755619/0001-kingdom_889_english01.jpg",
         "/chapter-images/kingdom-raw/chapter-kingdom-raw-jap-889/.upload-1790678755619/0002-kingdom_889_english02.jpg",
@@ -495,8 +496,9 @@
       "createdAt": "2026-09-29T10:02:02.843Z",
       "updatedAt": "2026-09-29T10:48:01.149Z",
       "updated_at": "2026-09-29T10:48:01.149Z",
-      "seoTitle": "Kingdom Raw Chapter 889 | キングダム 第889話 | MangaGoRaw",
-      "description": "Read Kingdom Chapter 889 raw (キングダム 第889話) online on MangaGoRaw. View all chapter pages."
+      "seoTitle": "Kingdom Raw Chapter 889 English | キングダム 第889話 | MangaGoRaw",
+      "description": "Read Kingdom Raw Chapter 889 in English online on MangaGoRaw. View all 19 chapter pages.",
+      "language": "en"
     },
     {
       "id": "manual-kagurabachi-raw-132",
@@ -642,7 +644,10 @@
       "country": "JP",
       "pages": [],
       "createdAt": "2026-10-03T08:30:00.000Z",
-      "updatedAt": "2026-10-03T08:30:00.000Z"
+      "updatedAt": "2026-10-03T08:30:00.000Z",
+      "seoTitle": "Kingdom Raw Chapter 890 Japanese | キングダム 第890話 | MangaGoRaw",
+      "description": "Read Kingdom Raw Chapter 890 in Japanese (キングダム 第890話) online on MangaGoRaw. Chapter images will be available after upload.",
+      "language": "ja"
     },
     {
       "id": "manual-kingdom-raw-eng-890",
@@ -653,18 +658,10 @@
       "country": "ENG",
       "pages": [],
       "createdAt": "2026-10-03T08:30:00.000Z",
-      "updatedAt": "2026-10-03T08:30:00.000Z"
-    },
-    {
-      "id": "manual-blue-lock-raw-jap-363",
-      "mangaId": "blue-lock",
-      "number": 363,
-      "title": "ブルーロック raw - Blue Lock raw 第363話 | JAP",
-      "slug": "blue-lock-raw-jap-363",
-      "country": "JP",
-      "pages": [],
-      "createdAt": "2026-10-03T08:30:00.000Z",
-      "updatedAt": "2026-10-03T08:30:00.000Z"
+      "updatedAt": "2026-10-03T08:30:00.000Z",
+      "seoTitle": "Kingdom Raw Chapter 890 English | MangaGoRaw",
+      "description": "Read Kingdom Raw Chapter 890 in English online on MangaGoRaw. Chapter images will be available after upload.",
+      "language": "en"
     },
     {
       "id": "manual-blue-lock-raw-eng-363",
@@ -675,7 +672,10 @@
       "country": "ENG",
       "pages": [],
       "createdAt": "2026-10-03T08:30:00.000Z",
-      "updatedAt": "2026-10-03T08:30:00.000Z"
+      "updatedAt": "2026-10-03T08:30:00.000Z",
+      "seoTitle": "Blue Lock Raw Chapter 363 English | ブルーロック 第363話 | MangaGoRaw",
+      "description": "Read Blue Lock Raw Chapter 363 in English online on MangaGoRaw. Chapter images will be available after upload.",
+      "language": "en"
     },
     {
       "id": "manual-one-piece-raw-jap-1195",
@@ -686,7 +686,10 @@
       "country": "JP",
       "pages": [],
       "createdAt": "2026-10-03T08:30:00.000Z",
-      "updatedAt": "2026-10-03T08:30:00.000Z"
+      "updatedAt": "2026-10-03T08:30:00.000Z",
+      "seoTitle": "One Piece Raw Chapter 1195 Japanese | ワンピース 第1195話 | MangaGoRaw",
+      "description": "Read One Piece Raw Chapter 1195 in Japanese (ワンピース 第1195話) online on MangaGoRaw. Chapter images will be available after upload.",
+      "language": "ja"
     },
     {
       "id": "manual-one-piece-raw-eng-1195",
@@ -697,7 +700,10 @@
       "country": "ENG",
       "pages": [],
       "createdAt": "2026-10-03T08:30:00.000Z",
-      "updatedAt": "2026-10-03T08:30:00.000Z"
+      "updatedAt": "2026-10-03T08:30:00.000Z",
+      "seoTitle": "One Piece Raw Chapter 1195 English | ワンピース 第1195話 | MangaGoRaw",
+      "description": "Read One Piece Raw Chapter 1195 in English online on MangaGoRaw. Chapter images will be available after upload.",
+      "language": "en"
     }
   ]
 }
