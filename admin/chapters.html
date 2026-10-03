@@ -27,7 +27,7 @@ function render(){
     o.textContent='No manga loaded';
     sel.appendChild(o);
   }
-  if(prev&&ms.some(m=>String(m.id)===prev))sel.value=prev;
+  if(prev&&ms.some(m=>String(m.id)===prev)){sel.value=prev;}else{const preferred=ms.find(m=>String(m.id||'').toLowerCase()==='blue-lock'||String(m.slug||'').toLowerCase()==='blue-lock');if(preferred)sel.value=String(preferred.id);}
   const a=allChapters().sort((x,y)=>(Number(y.number)||0)-(Number(x.number)||0));
   const q=$('search').value.trim().toLowerCase();
   const shown=a.filter(c=>!q||[c.title,c.slug,c.number].join(' ').toLowerCase().includes(q));
