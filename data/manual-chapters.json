@@ -632,6 +632,72 @@
       "updated_at": "2026-10-02T12:35:00.000Z",
       "seoTitle": "SAKAMOTO DAYS Raw Chapter 277 English | MangaGoRaw",
       "description": "Read SAKAMOTO DAYS Raw Chapter 277 in English on MangaGoRaw. View all 19 chapter pages online."
+    },
+    {
+      "id": "manual-kingdom-raw-jap-890",
+      "mangaId": "kingdom-raw",
+      "number": 890,
+      "title": "キングダム raw - Kingdom Raw 第890話 | JAP",
+      "slug": "kingdom-raw-jap-890",
+      "country": "JP",
+      "pages": [],
+      "createdAt": "2026-10-03T08:30:00.000Z",
+      "updatedAt": "2026-10-03T08:30:00.000Z"
+    },
+    {
+      "id": "manual-kingdom-raw-eng-890",
+      "mangaId": "kingdom-raw",
+      "number": 890,
+      "title": "キングダム raw - Kingdom Raw 第890話 | ENG",
+      "slug": "kingdom-raw-eng-890",
+      "country": "ENG",
+      "pages": [],
+      "createdAt": "2026-10-03T08:30:00.000Z",
+      "updatedAt": "2026-10-03T08:30:00.000Z"
+    },
+    {
+      "id": "manual-blue-lock-raw-jap-363",
+      "mangaId": "blue-lock",
+      "number": 363,
+      "title": "ブルーロック raw - Blue Lock raw 第363話 | JAP",
+      "slug": "blue-lock-raw-jap-363",
+      "country": "JP",
+      "pages": [],
+      "createdAt": "2026-10-03T08:30:00.000Z",
+      "updatedAt": "2026-10-03T08:30:00.000Z"
+    },
+    {
+      "id": "manual-blue-lock-raw-eng-363",
+      "mangaId": "blue-lock",
+      "number": 363,
+      "title": "ブルーロック raw - Blue Lock raw 第363話 | ENG",
+      "slug": "blue-lock-raw-eng-363",
+      "country": "ENG",
+      "pages": [],
+      "createdAt": "2026-10-03T08:30:00.000Z",
+      "updatedAt": "2026-10-03T08:30:00.000Z"
+    },
+    {
+      "id": "manual-one-piece-raw-jap-1195",
+      "mangaId": "one-piece",
+      "number": 1195,
+      "title": "ワンピース raw - One Piece raw 第1195話 | JAP",
+      "slug": "one-piece-raw-jap-1195",
+      "country": "JP",
+      "pages": [],
+      "createdAt": "2026-10-03T08:30:00.000Z",
+      "updatedAt": "2026-10-03T08:30:00.000Z"
+    },
+    {
+      "id": "manual-one-piece-raw-eng-1195",
+      "mangaId": "one-piece",
+      "number": 1195,
+      "title": "ワンピース raw - One Piece raw 第1195話 | ENG",
+      "slug": "one-piece-raw-eng-1195",
+      "country": "ENG",
+      "pages": [],
+      "createdAt": "2026-10-03T08:30:00.000Z",
+      "updatedAt": "2026-10-03T08:30:00.000Z"
     }
   ]
 }
