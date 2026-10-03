@@ -436,9 +436,9 @@
     {
       "id": "manual-1790605018180",
       "mangaId": "blue-lock",
-      "number": 364,
-      "title": "ブルーロック raw - Blue Lock raw 第364話 | JAP",
-      "slug": "blue-loc-raw-364",
+      "number": 363,
+      "title": "ブルーロック raw - Blue Lock raw 第363話 | JAP",
+      "slug": "blue-loc-raw-363",
       "country": "JP",
       "pages": [
         "/chapter-images/blue-lock/chapter-blue-loc-raw-363/.upload-1790605181481/0001-1.jpg",
@@ -459,10 +459,10 @@
         "/chapter-images/blue-lock/chapter-blue-loc-raw-363/.upload-1790605181481/0016-16.jpg"
       ],
       "createdAt": "2026-09-28T14:16:58.159Z",
-      "updatedAt": "2026-10-03T04:55:00.000Z",
+      "updatedAt": "2026-10-03T09:00:00.000Z",
       "updated_at": "2026-09-28T14:28:00.306Z",
-      "seoTitle": "Blue Lock Raw Chapter 364 Japanese | ブルーロック 第364話 | MangaGoRaw",
-      "description": "Read Blue Lock Raw Chapter 364 in Japanese (ブルーロック 第364話) online on MangaGoRaw. View all 16 chapter pages.",
+      "seoTitle": "Blue Lock Raw Chapter 363 Japanese | ブルーロック 第363話 | MangaGoRaw",
+      "description": "Read Blue Lock Raw Chapter 363 in Japanese (ブルーロック 第363話) online on MangaGoRaw. View all 16 chapter pages.",
       "language": "ja"
     },
     {
@@ -672,15 +672,15 @@
     {
       "id": "manual-blue-lock-raw-eng-363",
       "mangaId": "blue-lock",
-      "number": 364,
-      "title": "ブルーロック raw - Blue Lock raw 第364話 | ENG",
-      "slug": "blue-lock-raw-eng-364",
+      "number": 363,
+      "title": "ブルーロック raw - Blue Lock raw 第363話 | ENG",
+      "slug": "blue-lock-raw-eng-363",
       "country": "ENG",
       "pages": [],
       "createdAt": "2026-10-03T08:30:00.000Z",
-      "updatedAt": "2026-10-03T04:55:00.000Z",
-      "seoTitle": "Blue Lock Raw Chapter 364 English | ブルーロック 第364話 | MangaGoRaw",
-      "description": "Read Blue Lock Raw Chapter 364 in English online on MangaGoRaw. Chapter images will be available after upload.",
+      "updatedAt": "2026-10-03T08:30:00.000Z",
+      "seoTitle": "Blue Lock Raw Chapter 363 English | ブルーロック 第363話 | MangaGoRaw",
+      "description": "Read Blue Lock Raw Chapter 363 in English online on MangaGoRaw. Chapter images will be available after upload.",
       "language": "en"
     },
     {
@@ -716,6 +716,52 @@
       "description": "Read One Piece Raw Chapter 1195 in English online on MangaGoRaw. Chapter images will be available after upload.",
       "language": "en",
       "updated_at": "2026-10-03T04:09:37.387Z"
+    },
+    {
+      "id": "manual-blue-lock-raw-jap-364",
+      "mangaId": "blue-lock",
+      "number": 364,
+      "title": "ブルーロック raw - Blue Lock raw 第364話 | JAP",
+      "slug": "blue-loc-raw-364",
+      "country": "JP",
+      "pages": [
+        "/chapter-images/blue-lock/chapter-blue-loc-raw-363/.upload-1790605181481/0001-1.jpg",
+        "/chapter-images/blue-lock/chapter-blue-loc-raw-363/.upload-1790605181481/0002-2.jpg",
+        "/chapter-images/blue-lock/chapter-blue-loc-raw-363/.upload-1790605181481/0003-3.jpg",
+        "/chapter-images/blue-lock/chapter-blue-loc-raw-363/.upload-1790605181481/0004-4.jpg",
+        "/chapter-images/blue-lock/chapter-blue-loc-raw-363/.upload-1790605181481/0005-5.jpg",
+        "/chapter-images/blue-lock/chapter-blue-loc-raw-363/.upload-1790605181481/0006-6.jpg",
+        "/chapter-images/blue-lock/chapter-blue-loc-raw-363/.upload-1790605181481/0007-7.jpg",
+        "/chapter-images/blue-lock/chapter-blue-loc-raw-363/.upload-1790605181481/0008-8.jpg",
+        "/chapter-images/blue-lock/chapter-blue-loc-raw-363/.upload-1790605181481/0009-9.jpg",
+        "/chapter-images/blue-lock/chapter-blue-loc-raw-363/.upload-1790605181481/0010-10.jpg",
+        "/chapter-images/blue-lock/chapter-blue-loc-raw-363/.upload-1790605181481/0011-11.jpg",
+        "/chapter-images/blue-lock/chapter-blue-loc-raw-363/.upload-1790605181481/0012-12.jpg",
+        "/chapter-images/blue-lock/chapter-blue-loc-raw-363/.upload-1790605181481/0013-13.jpg",
+        "/chapter-images/blue-lock/chapter-blue-loc-raw-363/.upload-1790605181481/0014-14.jpg",
+        "/chapter-images/blue-lock/chapter-blue-loc-raw-363/.upload-1790605181481/0015-15.jpg",
+        "/chapter-images/blue-lock/chapter-blue-loc-raw-363/.upload-1790605181481/0016-16.jpg"
+      ],
+      "createdAt": "2026-10-03T09:00:00.000Z",
+      "updatedAt": "2026-10-03T09:54:00.000Z",
+      "updated_at": "2026-09-28T14:28:00.306Z",
+      "seoTitle": "Blue Lock Raw Chapter 364 Japanese | ブルーロック 第364話 | MangaGoRaw",
+      "description": "Read Blue Lock Raw Chapter 364 in Japanese (ブルーロック 第364話) online on MangaGoRaw. View all 16 chapter pages.",
+      "language": "ja"
+    },
+    {
+      "id": "manual-blue-lock-raw-eng-364",
+      "mangaId": "blue-lock",
+      "number": 364,
+      "title": "ブルーロック raw - Blue Lock raw 第364話 | ENG",
+      "slug": "blue-lock-raw-eng-364",
+      "country": "ENG",
+      "pages": [],
+      "createdAt": "2026-10-03T09:54:00.000Z",
+      "updatedAt": "2026-10-03T09:54:00.000Z",
+      "seoTitle": "Blue Lock Raw Chapter 364 English | ブルーロック 第364話 | MangaGoRaw",
+      "description": "Read Blue Lock Raw Chapter 364 in English online on MangaGoRaw. Chapter images have not been uploaded yet.",
+      "language": "en"
     }
   ]
 }
